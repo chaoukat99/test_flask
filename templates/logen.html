@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>formulaire ingenieur</title>
+    <link rel="stylesheet" href="projectm.css">
+</head>
+<body>
+    <form action="">
+        <h4>engineer</h4>
+        <hr>
+        <label>Email</label>
+        <input type="email">
+        <label>Password</label>
+        <input type="password">
+        <input type="submit" value="Login">
+        <a href="#">forgot password?</a>
+    </form>
+</body>
+</html>
+<style>
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+ }
+ body {
+    background-color: #073f59;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+ }
+ form {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 20px; /* Increase the padding to add space around the form fields */
+    border-radius: 6px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    width: 400px; /* Increase the width to make the form wider */
+    max-width: 90%; /* You can set a maximum width to prevent it from becoming too wide */
+    box-sizing: border-box; /* Include padding and border in the total width */
+}
+ h4 {
+     text-align: center;
+     font-size: 20px;
+     color: #073f59;
+ }
+ hr {
+    margin: 10px 0;
+    background-color: #ccc;
+    border: 0;
+    height: 1px;
+    width: 100%;
+ }
+label {
+    margin-bottom: 6px;
+}
+input {
+    margin-bottom: 5px;
+    padding: 5px;
+    outline: 0;
+    border: 1px solidrgba(0,0,0,0.4);
+}
+input:focus {
+    border: 1px solid #073f59;
+}
+input[type="submit"] {
+    margin-top: 15px;
+    background-color: #073f59;
+    color: #fff;
+    border: 1px solid #073f59;
+    cursor: pointer;
+}
+a {
+    text-align: center;
+    margin: 5px 0;
+    font-size: 14px;
+    text-decoration: 0;
+    color: #073f59;
+}
+
+</style>
+</html>
