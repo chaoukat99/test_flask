@@ -7,15 +7,14 @@
     <link rel="stylesheet" href="admin.css">
 </head>
 <body>
-    <form action="">
+    <form action="/check-admin-login" method="post">
         <h4>Admin</h4>
         <hr>
-        <label>Email</label>
-        <input type="email">
+        <label>Username</label>
+        <input type="text" name="username">
         <label>Password</label>
-        <input type="password">
+        <input type="password" name="password">
         <input type="submit" value="Login">
-        <a href="#">forgot password?</a>
     </form>
 </body>
 <style>
