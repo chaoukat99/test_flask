@@ -1,6 +1,13 @@
-from flask import Flask, render_template, redirect, jsonify,request
+from flask import Flask, render_template,session, redirect, jsonify,request
 from flask_mysqldb import MySQL
+import secrets
 app = Flask(__name__)
+
+
+# sET SECRET 
+secret_key=secrets.token_hex(16)
+app.secret_key=secret_key
+
 # mysql configuration
 app.config["MYSQL_HOST"]="localhost"
 app.config["MYSQL_USER"]="root"
@@ -46,7 +53,12 @@ def check_log_admin():
         if query:
             result= cursor.fetchall()
             if result:
-                return jsonify(result)
+                # return jsonify(result)
+                # if admin log in successfully we need to create  session
+                session["admin_logged"]=True
+                session["admin_data"]=result                
+
+                return redirect("/admin-dash",302)
         else:
                 return """<body><script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
                 </script>
@@ -61,6 +73,11 @@ def check_log_admin():
         },1000)
         </script><h1 style='display:none'>you are not allowed</h1></body>
                 """
+        
+@app.route("/deconn-admin")
+def deconn():
+     session["admin_logged"]=False
+     return redirect("/",302)        
 @app.route('/check-engineer-login', methods=["POST"])
 def check_log_engineer():
     if request.method== "POST":
