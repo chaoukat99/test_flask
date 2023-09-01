@@ -29,11 +29,15 @@
       <!-- Style.css -->
       <link rel="stylesheet" href="{{url_for('static', filename='assets/css/style.css')}}">
       <link rel="stylesheet" href="{{url_for('static', filename='assets/css/jquery.mCustomScrollbar.css')}}">
+      <script src="
+      https://cdn.jsdelivr.net/npm/sweetalert2@11.7.11/dist/sweetalert2.all.min.js
+      "></script>
   </head>
 
   <body>
     <!-- Pre-loader start -->
    
+    {% if "admin_logged" in session and  session["admin_logged"] %}
     <!-- Pre-loader end -->
     <div id="pcoded" class="pcoded">
         <div class="pcoded-overlay-box"></div>
@@ -82,7 +86,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="auth-normal-sign-in.html">
+                                        <a href="/deconn-admin">
                                             <i class="ti-layout-sidebar-left"></i> Logout
                                         </a>
                                     </li>
@@ -506,6 +510,27 @@ var nav = $('.fixed-button');
      }
  });
 </script>
+{% else %}
+   
+    <script>
+        
+        window.onload=function(){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Access Denied !! ',
+                showConfirmButton: false,
+                timer: 1500
+              })
+            setTimeout(()=>{
+                
+                window.location.href="/login-admin" 
+    
+            },2000)
+        }
+        
+    </script>
+    {% endif %}
 </body>
 
 </html>
