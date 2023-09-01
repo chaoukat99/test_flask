@@ -8,19 +8,18 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>Growing</title>
+      <title>Nearsecure</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
       <!-- bootstrap css -->
-      <!-- <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}"> -->
+      <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}"> 
       <!-- style css -->
-      <!-- <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}"> -->
+      <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}"> 
       <!-- Responsive-->
-      <!-- <link rel="stylesheet" href="{{url_for('static', filename='css/responsive.css')}}"> -->
-      <link rel="stylesheet" href="{{url_for('static', filename='css/omar.css')}}">
+      <link rel="stylesheet" href="{{url_for('static', filename='css/responsive.css')}}"> 
       <!-- fevicon -->
-      <link rel="icon" href="images/fevicon.png" type="image/gif" />
+      
       <!-- Scrollbar Custom CSS -->
       <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
       <!-- Tweaks for older IEs-->
@@ -29,6 +28,8 @@
       <link rel="stylesheet" href="css/owl.carousel.min.css">
       <link rel="stylesheet" href="css/owl.theme.default.min.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
     </head>
     <body>
       <!-- header top section start -->
@@ -36,13 +37,13 @@
         <div class="container">
           <div class="row">
             <div class="col-sm-4">
-              <div class="call_text"><a href="#"><img src="images/map-icon.png"><span class="call_text_left">Locations</span></a></div>
+              <div class="call_text"><a href="#"><img src="{{url_for('static', filename='images/map-icon.png')}}"><span class="call_text_left">Locations</span></a></div>
             </div>
             <div class="col-sm-4">
-              <div class="call_text"><a href="#"><img src="images/call-icon.png"><span class="call_text_left">+212 501041001</span></a></div>
+              <div class="call_text"><a href="#"><img src="{{url_for('static', filename='images/call-icon.png')}}"><span class="call_text_left">+212 501041001</span></a></div>
             </div>
             <div class="col-sm-4">
-              <div class="call_text"><a href="#"><img src="images/mail-icon.png"><span class="call_text_left">Demo@nearsecure.com</span></a></div>
+              <div class="call_text"><a href="#"><img src="{{url_for('static', filename='images/mail-icon.png')}}"><span class="call_text_left">Demo@nearsecure.com</span></a></div>
             </div>
           </div>
         </div>
@@ -52,7 +53,7 @@
       <div class="header_section">
         <div class="container">
           <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <div class="logo"><a href="index.html"><img src="images/last.png"></a></div>
+          <div class="logo"><a href="index.html"><img src="{{url_for('static', filename='images/last.png')}}"></a></div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -70,11 +71,16 @@
               <li class="nav-item">
                 <a class="nav-link" href="contact.html">CONTACT US</a>
               </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="#">LOGIN</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">SIGNUP</a>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Login
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/login-admin">Admin</a></li>
+                  <li><a class="dropdown-item" href="/login-projectmanager"> project manager</a></li>
+                  
+                  <li><a class="dropdown-item" href="/login-engineer">engineer</a></li>
+                </ul>
               </li>
             </ul>
           </div>
@@ -83,11 +89,12 @@
       </div>
       <!-- header section end -->
       <!-- banner section start -->
+      
       <div class="banner_section layout_padding">
         <div class="container-fluid">
           <div class="row">
             <div class="col-sm-8 padding_0">
-              <div><img src="images/Frodex - Cyber security.gif"></div>
+              <div><img src="{{url_for('static', filename='images/Frodex-Cyber20%security.png')}}"></div>
             </div>
             <div class="col-sm-4">
               <h1 class="clever_text">CREATIVE <span style="color: #feca01;">SOLUTIONS</span> FOR YOUR IT SECURITY</h1>
@@ -117,7 +124,7 @@
             <div class="col-sm-12 col-lg-8">
               <div class="plane_main active">
                 <div class="plane_left">
-                  <div class="icon_1"><img src="images/auditory.png"></div>
+                  <div class="icon_1"><img src="{{url_for('static', filename='images/auditory.png')}}"></div>
                 </div>
                 <div class="plane_right">
                   <h3 class="vision_text">Security audit</h3>
@@ -126,7 +133,7 @@
               </div>
               <div class="plane_main">
                 <div class="plane_left">
-                  <div class="icon_1"><img src="images/white-hat.png"></div>
+                  <div class="icon_1"><img src="{{url_for('static', filename='images/white-hat.png')}}"></div>
                 </div>
                 <div class="plane_right">
                   <h3 class="vision_text">Penetration testing</h3>
@@ -135,7 +142,7 @@
               </div>
               <div class="plane_main">
                 <div class="plane_left">
-                  <div class="icon_1"><img src="images/hacker.png"></div>
+                  <div class="icon_1"><img src="{{url_for('static', filename='images/hacker.png')}}"></div>
                 </div>
                 <div class="plane_right">
                   <h3 class="vision_text">Red teaming</h3>
@@ -144,7 +151,7 @@
               </div>
               <div class="plane_main">
                 <div class="plane_left">
-                  <div class="icon_1"><img src="images/learning.png"></div>
+                  <div class="icon_1"><img src="{{url_for('static', filename='images/learning.png')}}"></div>
                 </div>
                 <div class="plane_right">
                   <h3 class="vision_text">Training</h3>
@@ -154,7 +161,7 @@
               <div class="read_bt"><a href="#">Read More</a></div>
             </div>
             <div class="col-sm-12 col-lg-4">
-              <div class="image_1"><img src="images/cyber-security.png"></div>
+              <div class="image_1"><img src="{{url_for('static', filename='images/cyber-security.png')}}"></div>
             </div>
           </div>
         </div>
@@ -174,7 +181,7 @@
               </div>
             </div>
             <div class="col-sm-12 col-lg-8 padding_0">
-              <div class="image_2"><img src="images/hacker1.png"></div>
+              <div class="image_2"><img src="{{url_for('static', filename='images/hacker1.png')}}"></div>
               <!--<h1 class="your_text">Your<br> security<br> Grows</h1>-->
             </div>
           </div>
@@ -194,20 +201,20 @@
           <div id="main_slider" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <div class="client_main"><img src="images/card4-fotor-20230718123952 (1).png"></div>
+                <div class="client_main"><img src="{{url_for('static', filename='images/images/card4-fotor-20230718123952 (1).png')}}"></div>
                 <div class="client_main_1">
                   <h1 class="kamlioo_text">Welcome</h1>
                   <p class="ipsum_text">Nearsecure is a Moroccan company specializing in IT Security, founded by experts who have conducted several projects of auditing, consulting and integration of security solutions at the international level.</p>
-                  <div class="quote_icon"><img src="images/quote-icon.png"></div>
+                  <div class="quote_icon"><img src="{{url_for('static', filename='images/quote-icon.png')}}"></div>
                 </div>
               </div>
               <div class="carousel-item">
-                <div class="client_main"><img src="images/collaboration-fotor-2023071813555.png"></div>
+                <div class="client_main"><img src="{{url_for('static', filename='images/collaboration-fotor-2023071813555.png')}}"></div>
                 <div class="client_main_1">
                   <h1 class="kamlioo_text">Team</h1>
                   <p class="ipsum_text">Near Secure is an african leading company specializing in information security systems , founded by some of the best defensive & offensive security experts and researchers in the world, having conducted several successful missions in audit, penetration testing, investigation and training at some of the Organizations of Vital Interest and other highly reputed customers.
                     By offering a highly-qualified service for integration of the most appropriate security solutions, our team tries to help to build a NearSecured Systems !. </p>
-                  <div class="quote_icon"><img src="images/quote-icon.png"></div>
+                  <div class="quote_icon"><img src="{{url_for('static', filename='images/quote-icon.png')}}"></div>
                 </div>
               </div>
             </div>
@@ -247,7 +254,7 @@
               <div class="col-md-6">
                 <div class="map">
                   <div class="map-responsive">
-                    <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=Eiffel+Tower+Paris+France" width="600" height="400" frameborder="0" style="border:0; width: 100%;" allowfullscreen></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3307.8270529850734!2d-6.8461939243991266!3d33.99697577317778!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda713c1670f75af%3A0x559d62b57e59661f!2sNearSecure!5e0!3m2!1sfr!2sma!4v1690939747599!5m2!1sfr!2sma" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
                   </div>
                 </div>
               </div>
@@ -259,7 +266,7 @@
           <div class="container">
             <div class="row">
               <div class="col-sm-4">
-                <div class="footer_logo"><img src="images/last.png"></div>
+                <div class="footer_logo"><img src="{{url_for('static', filename='images/last.png')}}"></div>
               </div>
               <div class="col-sm-4">
                 <h1 class="footer_about">Newsletter</h1>
