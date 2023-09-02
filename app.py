@@ -50,15 +50,38 @@ def check_log_admin():
         password= request.form["password"]
         cursor= mysql.connection.cursor()
         query= cursor.execute("SELECT * FROM admins WHERE email=%s AND pass=%s", (username,password))
+
+        # Statistics 
+        cursor_admin=mysql.connection.cursor()
+        query_cursor2=cursor_admin.execute("SELECT count(*) FROM admins")
+        if query_cursor2:
+             num_admin = cursor_admin.fetchall()
+
+        #  Project Manager
+        cursor_chef=mysql.connection.cursor()
+        query_cursor3=cursor_chef.execute("SELECT count(*) FROM chef_projet")
+        if query_cursor3:
+             chef_count = cursor_chef.fetchall()
+        
+        #Enginner 
+        cursor_eng=mysql.connection.cursor()
+        query_cursor4=cursor_eng.execute("SELECT count(*) FROM ingenieur")
+        if query_cursor4:
+             num_eng = cursor_eng.fetchall()
+
         if query:
             result= cursor.fetchall()
             if result:
                 # return jsonify(result)
                 # if admin log in successfully we need to create  session
                 session["admin_logged"]=True
-                session["admin_data"]=result                
+                session["admin_data"]=result   
+                session["count_admins"]= num_admin            
+                session["count_chefs"]= chef_count            
+                session["count_eng"]= num_eng            
 
                 return redirect("/admin-dash",302)
+               
         else:
                 return """<body><script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
                 </script>
