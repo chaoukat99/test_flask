@@ -75,9 +75,11 @@
                          
                             <li class="user-profile header-notification">
                                 <a href="#!">
-                                    <span>Aya Rahmouny</span>
+                                    {%if "admin_data" in session and session["admin_data"] %}
+                                    <span>{{ session["admin_data"][0][4] }}</span>
                                     <i class="ti-angle-down"></i>
                                 </a>
+                                {% endif %}
                                 <ul class="show-notification profile-notification">
                                 
                                     <li>
@@ -219,7 +221,7 @@
                                                     <div class="card-block-small">
                                                         <i class="icofont icofont-pie-chart bg-c-blue card1-icon"></i>
                                                         <span class="text-c-blue f-w-600">Admin</span>
-                                                        <h4>2</h4>
+                                                        <h4>{{ session["count_admins"][0][0]  }}</h4>
                                                         
                                                     </div>
                                                 </div>
@@ -231,7 +233,7 @@
                                                     <div class="card-block-small">
                                                         <i class="icofont icofont-ui-home bg-c-pink card1-icon"></i>
                                                         <span class="text-c-pink f-w-600">Project managers</span>
-                                                        <h4>5</h4>
+                                                        <h4>{{ session["count_chefs"][0][0]  }}</h4>
                                                         
                                                     </div>
                                                 </div>
@@ -243,7 +245,7 @@
                                                     <div class="card-block-small">
                                                         <i class="icofont icofont-warning-alt bg-c-green card1-icon"></i>
                                                         <span class="text-c-green f-w-600">Engineers</span>
-                                                        <h4>20</h4>
+                                                        <h4>{{ session["count_eng"][0][0]  }}</h4>
                                                         
                                                     </div>
                                                 </div>
