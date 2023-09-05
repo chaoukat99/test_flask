@@ -100,7 +100,23 @@ def check_log_admin():
 @app.route("/deconn-admin")
 def deconn():
      session["admin_logged"]=False
-     return redirect("/",302)        
+     return redirect("/",302)  
+
+
+# deconnexion pm
+
+
+@app.route("/deconn-pm")
+def deconn2():
+     session["pm_logged"]=False
+     return redirect("/")
+
+# deconn engineer
+
+@app.route("/deconn-eng")
+def deconn3():
+     session["eng_logged"]=False
+     return redirect("/")
 @app.route('/check-engineer-login', methods=["POST"])
 def check_log_engineer():
     if request.method== "POST":
@@ -111,7 +127,9 @@ def check_log_engineer():
         if query:
             result= cursor.fetchall()
             if result:
-                return jsonify(result)
+                session["eng_logged"]=True
+                session["eng_data"]=result
+                return redirect("/engineer-dash",302)
         else:
                 return """<body><script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
                 </script>
@@ -136,7 +154,7 @@ def check_log_prpjectmanager():
         if query:
             result= cursor.fetchall()
             if result:
-                return jsonify(result)
+                return redirect("/projectmanager-dash",302)
         else:
                 return """<body><script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
                 </script>
