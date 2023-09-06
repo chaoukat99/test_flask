@@ -154,6 +154,8 @@ def check_log_prpjectmanager():
         if query:
             result= cursor.fetchall()
             if result:
+                session["pm_logged"]=True
+                session["pm_data"]=result
                 return redirect("/projectmanager-dash",302)
         else:
                 return """<body><script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
