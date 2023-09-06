@@ -68,7 +68,12 @@ def check_log_admin():
         query_cursor4=cursor_eng.execute("SELECT count(*) FROM ingenieur")
         if query_cursor4:
              num_eng = cursor_eng.fetchall()
+        # Projects
 
+        cursor_prj=mysql.connection.cursor()
+        query_cursor5=cursor_prj.execute("SELECT DISTINCT COUNT(*) FROM projet")
+        if query_cursor5:
+             num_prj=cursor_prj.fetchall()
         if query:
             result= cursor.fetchall()
             if result:
@@ -78,7 +83,8 @@ def check_log_admin():
                 session["admin_data"]=result   
                 session["count_admins"]= num_admin            
                 session["count_chefs"]= chef_count            
-                session["count_eng"]= num_eng            
+                session["count_eng"]= num_eng         
+                session["count_projet"]= num_prj  
 
                 return redirect("/admin-dash",302)
                
@@ -156,6 +162,13 @@ def check_log_prpjectmanager():
             if result:
                 session["pm_logged"]=True
                 session["pm_data"]=result
+                cursor_projects_of_pm=mysql.connection.cursor()
+                query_projects=cursor_projects_of_pm.execute("SELECT count(id_projet) FROM projet WHERE id_chef_trg=%s",(str(result[0][0])))
+                if query_projects:
+                    project_pm=cursor_projects_of_pm.fetchall() 
+                    if project_pm:
+                         session["project_pm"]=project_pm
+                    
                 return redirect("/projectmanager-dash",302)
         else:
                 return """<body><script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
