@@ -1,4 +1,4 @@
-from flask import Flask, render_template,session, redirect, jsonify,url_for,request
+from flask import Flask, render_template,session, redirect, jsonify,url_for,request,get_flashed_messages , flash
 from flask_mysqldb import MySQL
 import secrets
 app = Flask(__name__)
@@ -77,7 +77,14 @@ def dashadmin():
      return render_template("dashadmin.html")
 @app.route("/projectmanager-dash")
 def dashpm():
-     return render_template("dashpm.html")
+     # Get projects
+     #  flash()
+     data_received=get_flashed_messages(category_filter='data') 
+     data=session.get("data",[])
+    
+     return render_template("dashpm.html",projects=data)
+    
+
 @app.route("/engineer-dash")
 def dashengineer():
      return render_template("dashengineer.html")
@@ -238,7 +245,8 @@ JOIN tache on tache.id_projet = projet.id_projet JOIN ingenieur on ingenieur.id_
                  r_project=project_cursor.fetchall()
                  array_of_p=dictt(r_project)
                #   return redirect(url_for(".dashpm",projects=array_of_p)) 
-                 return render_template("dashpm.html",projects=array_of_p)  
+                 session["data"]=array_of_p
+                 return redirect(url_for('dashpm')) 
                  
                #   return jsonify(dictt(r_project))
 
