@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Dashboard-Projectmanager</title>
+    <title>Dashboard</title>
     <!-- HTML5 Shim and Respond.js IE9 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -29,12 +29,12 @@
       <!-- Style.css -->
       <link rel="stylesheet" href="{{url_for('static', filename='assets/css/style.css')}}">
       <link rel="stylesheet" href="{{url_for('static', filename='assets/css/jquery.mCustomScrollbar.css')}}">
-      <script src=" https://cdn.jsdelivr.net/npm/sweetalert2@11.7.11/dist/sweetalert2.all.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.11/dist/sweetalert2.all.min.js">
+
+      </script>
   </head>
 
   <body>
-
-    {% if "pm_logged" in session and "pm_data" in session  and  session["pm_logged"] %}
     <!-- Pre-loader start -->
    
     <!-- Pre-loader end -->
@@ -74,9 +74,7 @@
                          
                             <li class="user-profile header-notification">
                                 <a href="#!">
-                                    <span>
-                                        {{ session["pm_data"][0][1] }}
-                                    </span>
+                                    <span>John Doe</span>
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">
@@ -87,7 +85,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="/deconn-pm">
+                                        <a href="auth-normal-sign-in.html">
                                             <i class="ti-layout-sidebar-left"></i> Logout
                                         </a>
                                     </li>
@@ -110,7 +108,7 @@
                             <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Layout</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="active">
-                                    <a href="/projectmanager-dash">
+                                    <a href="/admin-dash">
                                         <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
                                         <span class="pcoded-mcaret"></span>
@@ -126,21 +124,21 @@
                                         <li class=" ">
                                             <a href="breadcrumb.html">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Create engineer</span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Create engineers</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class=" ">
                                             <a href="button.html">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Show engineer</span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Show engineers</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class=" ">
                                             <a href="tabs.html">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Delete engineer</span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Delete engineers</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
@@ -153,11 +151,47 @@
                                         </li>
                                     </ul>
                                 </li>
-                        
+                                <li class="pcoded-hasmenu">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
+                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Project managers</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+                                        <li class=" ">
+                                            <a href="breadcrumb.html">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">create project manager</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class=" ">
+                                            <a href="button.html">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Show project managers</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class=" ">
+                                            <a href="tabs.html">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Delete project managers</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class=" ">
+                                            <a href="color.html">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Report</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
                             </ul>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li>
-                                    <a href="form-elements-component.html">
+                                    <a href="statistics-admin.html">
                                         <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Statistics</span>
                                         <span class="pcoded-mcaret"></span>
@@ -173,99 +207,58 @@
                     </nav>
                     <div class="pcoded-content">
                         <div class="pcoded-inner-content">
-                            <div class="main-body">
-                                <div class="page-wrapper">
-
-                                    <div class="page-body">
-                                        <div class="row">
-                                            <!-- card1 start -->
-                                            
-                                            <!-- card1 end -->
-                                            <!-- card1 start -->
-                                            <!-- card1 end -->
-                                            <!-- card1 start -->
-                                            <div class="col-md-6 col-xl-3">
-                                                <div class="card widget-card-1">
-                                                    <div class="card-block-small">
-                                                        <i class="icofont icofont-warning-alt bg-c-green card1-icon"></i>
-                                                        <span class="text-c-green f-w-600">Engineers</span>
-                                                        <h4>{{ session["engineers_en"][0][0] }}</h4>
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- card1 end -->
-                                            <!-- card1 start -->
-                                            <div class="col-md-6 col-xl-3">
-                                                <div class="card widget-card-1">
-                                                    <div class="card-block-small">
-                                                        <i class="icofont icofont-social-twitter bg-c-yellow card1-icon"></i>
-                                                        <span class="text-c-yellow f-w-600">Projects</span>
-                                                        <h4>{{ session["project_pm"][0][0] }}</h4>
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- card1 end -->
-                                            <!-- Statestics Start -->
-                                          
-                                           
-                                           
-
-
-
-                                           
-                                           
-                                            <!-- Email Sent End -->
-                                            <!-- Data widget start -->
-                                           
-                                          
-                                                <!-- Data widget End -->
-                                                
-                                            </div>
+                            <div class="main-body d-flex justify-content-center " >
+                                
+                                    <div class="card mt-5" style="width: 600px;">
+                                        <div class="card-header">
+                                            <h3 class="text-center">Create engineer</h3>
                                         </div>
-                                    </div>
-                                    <h2 class="text-center">Projects</h2>
-                                    <div class="d-flex justify-content-center">
-                                            <div class="table-responsive">
-                                                  <table class="table table-hover">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Id</th>
-                                                            <th>Projects</th>
-                                                            <th>Engineers</th>
-                                                            <th>Status</th>
-                                                            <th>Date debut</th>
-                                                            <th>Date fin</th>
-                                                            <th class="text-center">Action</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                       
-                                                        {% for i in projects %} 
-                                                        <tr>
-                                                            <td>{{ i["id"] }}</td>
-                                                            <td>{{ i["name_p"] }}</td>
-                                                            <td>{{ i["ing_name"] }}</td>
-                                                            <td><span class="badge bg-primary">{{ i["status"] }}</span></td>
-                                                            <td>{{ i["date_debut"] }}</td>
-                                                            <td>{{ i["date_fin"] }}</td>
-                                                            <td><div class="d-flex justify-content-center" style="gap: 10px;">
-                                                                <a href="" class="btn btn-warning">Update</a>
-                                                                <a href="" class="btn btn-danger">delete</a>
-                                                               </div>
-                                                            </td>   
-                                                             
-                                                        </tr>
-                                                       {% endfor %}
-                                                     
-                                                        
-                                                    </tbody>
-                                                  </table>         
-                                            </div>   
-                                    </div>
+                                        <div class="card-body">
+                                            <form>
+                                                <div class="form-group input-group">
+                                                  <div class="input-group-prepend">
+                                                    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                                                  </div>
+                                                  <input name="" class="form-control" placeholder="Full name" type="text">
+                                                </div>
+                                                <div class="form-group input-group">
+                                                  <div class="input-group-prepend">
+                                                    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                                                  </div>
+                                                  <input name="" class="form-control" placeholder="Email address" type="email">
+                                                </div>
+                                                <div class="form-group input-group">
+                                                  <div class="input-group-prepend">
+                                                    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                                                  </div>
+                                                  <input class="form-control" placeholder="Create password" type="password" id="pass1">
+                                                </div>
+                                                <div class="form-group input-group">
+                                                  <div class="input-group-prepend">
+                                                    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                                                  </div>
+                                                  <input class="form-control" placeholder="Repeat password" type="password" id="pass2">
+                                                </div>
+                                                <div class="form-group">
+                                                  <button type="submit" class="btn btn-primary btn-block" disabled id="btn-submit"> Create  </button>
+                                                </div>
+                                              </form>
+                                        </div>
+
+                                      </div>
                                     
-                                    
+                                    <script>
+                                        let pass1 = document.querySelector("#pass1")
+                                        let pass2 = document.querySelector("#pass2")
+                                        let btn = document.querySelector("#btn-submit")
+                                        pass2.onblur=()=>{
+                                          if(pass1.value!==pass2.value){
+                                             btn.disabled=true 
+                                          }else{
+                                            btn.disabled=false
+                                          }
+                                        } 
+                                    </script>
 
 
                                     <div id="styleSelector">
@@ -361,27 +354,6 @@ var nav = $('.fixed-button');
      }
  });
 </script>
-{% else %}
-   
-    <script>
-        
-        window.onload=function(){
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Access Denied !! ',
-                showConfirmButton: false,
-                timer: 1500
-              })
-            setTimeout(()=>{
-                
-                window.location.href="/login-projectmanager" 
-    
-            },2000)
-        }
-        
-    </script>
-    {% endif %}
 </body>
 
 </html>

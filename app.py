@@ -72,9 +72,21 @@ def index():
     if query:
         result=cursor.fetchall()
     return render_template("home.html")
+@app.route("/admin-statistics")
+def statisticsadmin():
+     return render_template("statistics-admin.html")
+@app.route("/engineer-statistics")
+def statisticsengineer():
+     return render_template("statistics-en.html")
 @app.route("/admin-dash")
 def dashadmin():
      return render_template("dashadmin.html")
+@app.route("/create-ing")
+def createing():
+     return render_template("create-ing.html")
+@app.route("/create-pm")
+def createpm():
+     return render_template("create-pm.html")
 @app.route("/projectmanager-dash")
 def dashpm():
      # Get projects
