@@ -1,7 +1,57 @@
-from flask import Flask, render_template,session, redirect, jsonify,request
+from flask import Flask, render_template,session, redirect, jsonify,url_for,request
 from flask_mysqldb import MySQL
 import secrets
 app = Flask(__name__)
+
+#   Dictionnary fun 
+def dictt(arr):
+     if(len(arr)>1):
+          array_of_objects=map(lambda x:{"id":x[0],"name_p":x[1],"ing_name":x[2],"status":x[3],"date_debut":x[4],"date_fin":x[5]},arr)
+          return join_engineers(list(array_of_objects))
+     elif len(arr) == 1: 
+          return [{"id":arr[0][0],"name_p":arr[0][1],"ing_name":arr[0][2],"status":arr[0][3],"date_debut":arr[0][4],"date_fin":arr[0][5]}]
+     else : 
+          return [] 
+               
+
+
+
+def join_engineers(eng_list):
+    # Create a dictionary to store engineers by project
+    project_eng = {}
+
+    # Iterate through the list of dictionaries and group engineers by project
+    for entry in eng_list:
+        engineer = entry['ing_name']
+        project = entry['name_p']
+        if project in project_eng:
+            project_eng[project]['ing_name'].append(engineer)
+        else:
+            project_eng[project] = {
+                 'id': entry.get('id',None),
+                'ing_name': [engineer],
+                'status': entry.get('status', None),
+                'date_debut': entry.get('date_debut', None),
+                'date_fin': entry.get('date_fin', None)
+            }
+
+    # Create a list of dictionaries to store the result
+    result = []
+
+    # Iterate through the dictionary and format the output
+    for project, project_data in project_eng.items():
+        engineers_str = ', '.join(project_data['ing_name'])
+        result.append({
+             "id":project_data["id"],
+            'name_p': project,
+            'ing_name': engineers_str,
+            'status': project_data['status'],
+            'date_debut': project_data['date_debut'],
+            'date_fin': project_data['date_fin']
+        })
+
+    return result
+
 
 
 # sET SECRET 
@@ -108,8 +158,12 @@ def check_log_admin():
         
 @app.route("/deconn-admin")
 def deconn():
-     session["admin_logged"]=False
+     session.clear()
      return redirect("/",302)  
+
+
+
+
 
 
 # deconnexion pm
@@ -117,14 +171,14 @@ def deconn():
 
 @app.route("/deconn-pm")
 def deconn2():
-     session["pm_logged"]=False
+     session.clear()
      return redirect("/")
 
 # deconn engineer
 
 @app.route("/deconn-eng")
 def deconn3():
-     session["eng_logged"]=False
+     session.clear()
      return redirect("/")
 @app.route('/check-engineer-login', methods=["POST"])
 def check_log_engineer():
@@ -167,12 +221,34 @@ def check_log_prpjectmanager():
                 session["pm_data"]=result
                 cursor_projects_of_pm=mysql.connection.cursor()
                 query_projects=cursor_projects_of_pm.execute("SELECT count(id_projet) FROM projet WHERE id_chef_trg=%s",(str(result[0][0])))
+                # Enginners 
+                cursor_eng_pm=mysql.connection.cursor()
+                eng_query_pm=cursor_eng_pm.execute("SELECT count( DISTINCT id_ing) FROM tache JOIN projet on projet.id_projet=tache.id_projet JOIN chef_projet ON chef_projet.id_chef_prj=projet.id_chef_trg WHERE id_chef_prj=%s",(str(result[0][0])))
                 if query_projects:
                     project_pm=cursor_projects_of_pm.fetchall() 
                     if project_pm:
                          session["project_pm"]=project_pm
-                    
-                return redirect("/projectmanager-dash",302)
+                    if eng_query_pm:
+                         engineers_pm=cursor_eng_pm.fetchall()
+                         if engineers_pm:
+                              session["engineers_en"]=engineers_pm
+
+             # List Project of some enginner 
+            project_cursor=mysql.connection.cursor()
+            all_projects_query=project_cursor.execute("""SELECT projet.id_projet , projet.nom_projet ,ingenieur.nom_complet,status , projet.date_debut ,projet.date_fin FROM projet 
+JOIN tache on tache.id_projet = projet.id_projet JOIN ingenieur on ingenieur.id_ing = tache.id_ing WHERE projet.id_chef_trg=%s""",(str(result[0][0])))
+            if all_projects_query:
+                 r_project=project_cursor.fetchall()
+                 array_of_p=dictt(r_project)
+               #   return redirect(url_for(".dashpm",projects=array_of_p)) 
+                 return render_template("dashpm.html",projects=array_of_p)  
+                 
+               #   return jsonify(dictt(r_project))
+
+
+
+
+            # return redirect("/projectmanager-dash",302)
         else:
                 return """<body><script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
                 </script>
