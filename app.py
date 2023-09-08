@@ -25,6 +25,9 @@ def index():
 @app.route("/admin-dash")
 def dashadmin():
      return render_template("dashadmin.html")
+@app.route("/create-ing")
+def createing():
+     return render_template("create-ing.html")
 @app.route("/projectmanager-dash")
 def dashpm():
      return render_template("dashpm.html")
