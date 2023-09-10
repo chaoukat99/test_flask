@@ -93,8 +93,10 @@ def dashpm():
      #  flash()
      data_received=get_flashed_messages(category_filter='data') 
      data=session.get("data",[])
+     data_received = request.args.get('msg')
+
     
-     return render_template("dashpm.html",projects=data)
+     return render_template("dashpm.html",projects=data,msg=data_received)
     
 
 
@@ -115,7 +117,7 @@ def add_ing():
         if query:
           mysql.connection.commit()
           cursor_insert.close()
-          return jsonify("success")
+          return redirect(url_for("dashpm",msg="Engineer Added Successfully"))
         else:
          cursor_insert.close()
         return jsonify("unsuccess")
