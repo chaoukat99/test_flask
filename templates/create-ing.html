@@ -36,7 +36,8 @@
 
   <body>
     <!-- Pre-loader start -->
-   
+    {% if "pm_logged" in session and "pm_data" in session  and  session["pm_logged"] %}
+
     <!-- Pre-loader end -->
     <div id="pcoded" class="pcoded">
         <div class="pcoded-overlay-box"></div>
@@ -74,7 +75,9 @@
                          
                             <li class="user-profile header-notification">
                                 <a href="#!">
-                                    <span>John Doe</span>
+                                    <span>
+                                        {{ session["pm_data"][0][1] }}
+                                    </span>
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 <ul class="show-notification profile-notification">
@@ -214,24 +217,36 @@
                                             <h3 class="text-center">Create engineer</h3>
                                         </div>
                                         <div class="card-body">
-                                            <form>
+                                            <form action="/add-ing" method="POST">
                                                 <div class="form-group input-group">
                                                   <div class="input-group-prepend">
                                                     <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                                                   </div>
-                                                  <input name="" class="form-control" placeholder="Full name" type="text">
+                                                  <input name="fullname" class="form-control" placeholder="Full name" type="text">
                                                 </div>
                                                 <div class="form-group input-group">
                                                   <div class="input-group-prepend">
                                                     <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                                                   </div>
-                                                  <input name="" class="form-control" placeholder="Email address" type="email">
+                                                  <input name="email" class="form-control" placeholder="Email address" type="email">
                                                 </div>
+
+                                                <div class="form-group input-group">
+                                                    <div class="input-group-prepend">
+                                                    </div>
+                                                    <select name="dep" class="form-control" id="">
+                                                        <option value="">Departement </option>
+                                                        <option value="IT">IT </option>
+                                                        <option value="Marketing">Marketing </option>
+                                                        <option value="Finance">Finance </option>
+                                                    </select>
+                                                    
+                                                  </div>
                                                 <div class="form-group input-group">
                                                   <div class="input-group-prepend">
                                                     <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                                                   </div>
-                                                  <input class="form-control" placeholder="Create password" type="password" id="pass1">
+                                                  <input class="form-control" name="password" placeholder="Create password" type="password" id="pass1">
                                                 </div>
                                                 <div class="form-group input-group">
                                                   <div class="input-group-prepend">
@@ -354,6 +369,27 @@ var nav = $('.fixed-button');
      }
  });
 </script>
+{% else %}
+   
+    <script>
+        
+        window.onload=function(){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Access Denied !! ',
+                showConfirmButton: false,
+                timer: 1500
+              })
+            setTimeout(()=>{
+                
+                window.location.href="/login-projectmanager" 
+    
+            },2000)
+        }
+        
+    </script>
+    {% endif %}
 </body>
 
 </html>

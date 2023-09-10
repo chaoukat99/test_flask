@@ -97,6 +97,37 @@ def dashpm():
      return render_template("dashpm.html",projects=data)
     
 
+
+
+# test include
+
+# Add engineer
+
+@app.route("/add-ing",methods=["POST"])
+def add_ing():
+     if request.method == "POST":
+        full_name = request.form["fullname"]
+        email = request.form["email"]
+        password = request.form["password"]
+        dep = request.form["dep"]
+        cursor_insert = mysql.connection.cursor()
+        query = cursor_insert.execute("INSERT INTO ingenieur(nom_complet,email,departement,password) VALUES (%s,%s,%s,%s )",(full_name, email, dep, password))
+        if query:
+          mysql.connection.commit()
+          cursor_insert.close()
+          return jsonify("success")
+        else:
+         cursor_insert.close()
+        return jsonify("unsuccess")
+
+
+
+
+
+
+@app.route("/test_in")
+def t_in():
+     return render_template("Temp_eng.html")
 @app.route("/engineer-dash")
 def dashengineer():
      return render_template("dashengineer.html")
@@ -262,7 +293,7 @@ JOIN tache on tache.id_projet = projet.id_projet JOIN ingenieur on ingenieur.id_
                  
                #   return jsonify(dictt(r_project))
 
-
+         
 
 
             # return redirect("/projectmanager-dash",302)
