@@ -38,6 +38,14 @@
     <!-- Pre-loader start -->
    
     <!-- Pre-loader end -->
+    {% if msg %}
+    <div class="d-flex justify-content-center">
+        <div class="alert alert-success " style="position: absolute;z-index: 999999;">
+            {{ msg }}
+        </div>
+    </div>
+
+    {% endif %}
     <div id="pcoded" class="pcoded">
         <div class="pcoded-overlay-box"></div>
         <div class="pcoded-container navbar-wrapper">
