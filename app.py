@@ -120,8 +120,30 @@ def add_ing():
           return redirect(url_for("dashpm",msg="Engineer Added Successfully"))
         else:
          cursor_insert.close()
-        return jsonify("unsuccess")
+         return jsonify("unsuccess")
 
+
+
+@app.route("/create-project")
+def create_p():
+     return render_template("create_project.html")
+
+
+@app.route("/store-project",methods=["POST"])
+def store_project():
+     p_name=request.form["p_name"]
+     date_d=request.form["date_d"]
+     date_f=request.form["date_f"]
+     id_pm=session["pm_data"][0][0]
+     cursor_insert=mysql.connection.cursor()
+     query=cursor_insert.execute("INSERT INTO projet(nom_projet,date_debut,date_fin,id_chef_trg) VALUES(%s,%s,%s,%s)",(p_name,date_d,date_f,id_pm))
+     if query:
+          mysql.connection.commit()
+          cursor_insert.close()
+          return redirect(url_for("dashpm",msg="Project Created Successfully")) 
+     else:
+        cursor_insert.close()
+        return jsonify("unsuccess")
 
 
 
