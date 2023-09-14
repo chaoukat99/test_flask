@@ -32,6 +32,12 @@
       <script src="
       https://cdn.jsdelivr.net/npm/sweetalert2@11.7.11/dist/sweetalert2.all.min.js
       "></script>
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+      <style>
+        rect {
+            fill:transparent;
+        }
+      </style>
   </head>
 
   <body>
@@ -162,7 +168,7 @@
                                     </a>
                                     <ul class="pcoded-submenu">
                                         <li class=" ">
-                                            <a href="/create-pm">
+                                            <a href="/create-pm-admin">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">create project manager</span>
                                                 <span class="pcoded-mcaret"></span>
@@ -200,7 +206,13 @@
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                              
+                                <li>
+                                    <a href="/show-project">
+                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Show Project</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
                                 
                             </ul>
 
@@ -262,6 +274,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div id="piechart_3d" style="width: 500px; height: 300px;"></div>
                                             <!-- card1 end -->
                                             <!-- Statestics Start -->
                                           
@@ -293,7 +306,30 @@
             
             </div>
         </div>
+        
+        <script>
+            google.charts.load("current", {packages:["corechart"]});
+            google.charts.setOnLoadCallback(drawChart);
+            function drawChart() {
+              var data = google.visualization.arrayToDataTable([
+                ['Task', 'Hours per Day'],
+                ['Work',     11],
+                ['Eat',      2],
+                ['Commute',  2],
+                ['Watch TV', 2],
+                ['Sleep',    7]
+              ]);
+      
+              var options = {
+                title: 'My Daily Activities',
+                is3D: true,
+              };
+      
+              var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+              chart.draw(data, options);
+            }
 
+        </script>
         <!-- Warning Section Starts -->
         <!-- Older IE warning message -->
     <!--[if lt IE 9]>

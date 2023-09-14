@@ -75,6 +75,9 @@ def index():
 @app.route("/admin-statistics")
 def statisticsadmin():
      return render_template("statistics-admin.html")
+@app.route("/pm-statistics")
+def statisticspm():
+     return render_template("statistics-pm.html")
 @app.route("/engineer-statistics")
 def statisticsengineer():
      return render_template("statistics-en.html")
@@ -84,9 +87,9 @@ def dashadmin():
 @app.route("/create-ing")
 def createing():
      return render_template("create-ing.html")
-@app.route("/create-pm")
+@app.route("/create-pm-admin")
 def createpm():
-     return render_template("create-pm.html")
+     return render_template("create-pm-admin.html")
 @app.route("/projectmanager-dash")
 def dashpm():
      # Get projects
@@ -152,6 +155,9 @@ def store_project():
 @app.route("/test_in")
 def t_in():
      return render_template("Temp_eng.html")
+@app.route("/show-project")
+def showproject():
+     return render_template("show-project.html")
 @app.route("/engineer-dash")
 def dashengineer():
      return render_template("dashengineer.html")

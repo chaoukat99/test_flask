@@ -240,45 +240,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <h2 class="text-center">Projects</h2>
-                                    <div class="d-flex justify-content-center">
-                                            <div class="table-responsive">
-                                                  <table class="table table-hover">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Id</th>
-                                                            <th>Projects</th>
-                                                            <th>Engineers</th>
-                                                            <th>Status</th>
-                                                            <th>Date debut</th>
-                                                            <th>Date fin</th>
-                                                            <th class="text-center">Action</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                       
-                                                        {% for i in projects %} 
-                                                        <tr>
-                                                            <td>{{ i["id"] }}</td>
-                                                            <td>{{ i["name_p"] }}</td>
-                                                            <td>{{ i["ing_name"] }}</td>
-                                                            <td><span class="badge bg-primary">{{ i["status"] }}</span></td>
-                                                            <td>{{ i["date_debut"] }}</td>
-                                                            <td>{{ i["date_fin"] }}</td>
-                                                            <td><div class="d-flex justify-content-center" style="gap: 10px;">
-                                                                <a href="" class="btn btn-warning">Update</a>
-                                                                <a href="" class="btn btn-danger">delete</a>
-                                                               </div>
-                                                            </td>   
-                                                             
-                                                        </tr>
-                                                       {% endfor %}
-                                                     
-                                                        
-                                                    </tbody>
-                                                  </table>         
-                                            </div>   
-                                    </div>
+                                    
                                     
                                     
 
