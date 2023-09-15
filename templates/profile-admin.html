@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Dashboard-Enngineer</title>
+    <title>Dashboard-admin</title>
     <!-- HTML5 Shim and Respond.js IE9 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -32,13 +32,25 @@
       <script src="
       https://cdn.jsdelivr.net/npm/sweetalert2@11.7.11/dist/sweetalert2.all.min.js
       "></script>
+      <style>
+      .gradient-custom {
+        /* fallback for old browsers */
+        background: #073f59;
+        
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: -webkit-linear-gradient(to right bottom, #073f59, #165979);
+        
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: linear-gradient(to right bottom, #073f59, #165979)
+        }
+        </style>
   </head>
 
   <body>
     <!-- Pre-loader start -->
    
+    {% if "admin_logged" in session and  session["admin_logged"] %}
     <!-- Pre-loader end -->
-    {% if "eng_logged" in session and  session["eng_logged"] %}
     <div id="pcoded" class="pcoded">
         <div class="pcoded-overlay-box"></div>
         <div class="pcoded-container navbar-wrapper">
@@ -75,20 +87,24 @@
                          
                             <li class="user-profile header-notification">
                                 <a href="#!">
-                                    <span>
-                                        {{ session["eng_data"][0][1] }}
-                                    </span>
+                                    {%if "admin_data" in session and session["admin_data"] %}
+                                    <span>{{ session["admin_data"][0][4] }}</span>
                                     <i class="ti-angle-down"></i>
                                 </a>
+                                {% endif %}
                                 <ul class="show-notification profile-notification">
-                                
+                                    <button type="button" class="btn btn-primary">
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        99+</span>
+                                        Notifications 
+                                    </button>
                                     <li>
-                                        <a href="/engineer-profile">
+                                        <a href="#">
                                             <i class="ti-user"></i> Profile
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="/deconn-eng">
+                                        <a href="/deconn-admin">
                                             <i class="ti-layout-sidebar-left"></i> Logout
                                         </a>
                                     </li>
@@ -111,19 +127,93 @@
                             <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Layout</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="active">
-                                    <a href="/engineer-dash">
+                                    <a href="/admin-dash">
                                         <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                
+                                <li class="pcoded-hasmenu">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
+                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Manage engineers</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+                                        
+                                        <li class=" ">
+                                            <a href="button.html">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Show engineers</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class=" ">
+                                            <a href="tabs.html">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Delete engineer</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class=" ">
+                                            <a href="color.html">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Report</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="pcoded-hasmenu">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
+                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Manage project managers</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+                                        <li class=" ">
+                                            <a href="/create-pm-admin">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">create project manager</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class=" ">
+                                            <a href="button.html">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Show project managers</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class=" ">
+                                            <a href="tabs.html">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Delete project managers</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class=" ">
+                                            <a href="color.html">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Report</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
                             </ul>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li>
-                                    <a href="/engineer-statistics">
+                                    <a href="/admin-statistics">
                                         <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Statistics</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/show-project">
+                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Show Projects</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -135,115 +225,59 @@
                                 
                             </ul>
                     </nav>
-                    <div class="pcoded-content">
-                        <div class="pcoded-inner-content">
-                            <div class="main-body">
-                                <div class="page-wrapper">
-
-                                    <div class="page-body">
-                                        <div class="row">
-                                            <!-- card1 start -->
-                                            <div class="col-md-6 col-xl-3">
-                                                <div class="card widget-card-1">
-                                                    <div class="card-block-small">
-                                                        <i class="icofont icofont-pie-chart bg-c-blue card1-icon"></i>
-                                                        <span class="text-c-blue f-w-600">Tasks</span>
-                                                        <h4>2</h4>
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- card1 end -->
-                                            <!-- card1 start -->
-                                            <!-- card1 end -->
-                                            <!-- card1 start -->
-                                            
-                                            
-                                            <!-- card1 end -->
-                                            <!-- card1 start -->
-                                            <div class="col-md-6 col-xl-3">
-                                                <div class="card widget-card-1">
-                                                    <div class="card-block-small">
-                                                        <i class="icofont icofont-social-twitter bg-c-yellow card1-icon"></i>
-                                                        <span class="text-c-yellow f-w-600">Projects</span>
-                                                        <h4>2</h4>
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- card1 end -->
-                                            <!-- Statestics Start -->
-                                          
-                                           
-                                           
-
-
-
-                                           
-                                           
-                                            <!-- Email Sent End -->
-                                            <!-- Data widget start -->
-                                           
-                                          
-                                                <!-- Data widget End -->
-                                                
-                                            </div>
+                    <section class="vh-100 d-flex justify-content-center" style="background-color: #f4f5f7; margin: 0 auto;"> 
+                        <div class="container py-5 h-100" >
+                          <div class="row d-flex justify-content-center h-100">
+                            <div class="col col-lg-10 mb-4 mb-lg-0">
+                              <div class="card mb-3" style="border-radius: .5rem;">
+                                <div class="row g-0">
+                                  <div class="col-md-4 gradient-custom text-center text-white"
+                                    style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                                      alt="Avatar" class="img-fluid my-5" style="width: 100px;" />
+                                    <h5 style="font-weight: bold;">{{session["admin_data"][0][4]}}</h5>
+                                    <p>Admin</p>
+                                    <i class="far fa-edit mb-5"></i>
+                                  </div>
+                                  <div class="col-md-8">
+                                    <div class="card-body p-4">
+                                      <h6 style="font-weight: bold;">Information</h6>
+                                      <hr class="mt-0 mb-4">
+                                      <div class="row pt-1">
+                                        <div class="col-6 mb-3">
+                                          <h6>Email</h6>
+                                          <p class="text-muted">{{session["admin_data"][0][1]}}</p>
                                         </div>
+                                        <div class="col-6 mb-3">
+                                          <h6>Phone</h6>
+                                          <p class="text-muted">{{session["admin_data"][0][5]}}</p>
+                                        </div>
+                                      </div>
+                                      <h6>Projects</h6>
+                                      <hr class="mt-0 mb-4">
+                                      <div class="row pt-1">
+                                        <div class="col-6 mb-3">
+                                          <h6>Recent</h6>
+                                          <p class="text-muted">Lorem ipsum</p>
+                                        </div>
+                                        <div class="col-6 mb-3">
+                                          <h6>Most Viewed</h6>
+                                          <p class="text-muted">Dolor sit amet</p>
+                                        </div>
+                                      </div>
+                                      <div class="d-flex justify-content-start">
+                                        <a href="#!"><i class="fab fa-facebook-f fa-lg me-3"></i></a>
+                                        <a href="#!"><i class="fab fa-twitter fa-lg me-3"></i></a>
+                                        <a href="#!"><i class="fab fa-instagram fa-lg"></i></a>
+                                      </div>
                                     </div>
-                                    <h2 class="text-center">Projects</h2>
-                                    <div class="d-flex justify-content-center">
-                                            <div class="table-responsive">
-                                                  <table class="table table-hover">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Projects</th>
-                                                            <th>Tasks</th>
-                                                            <th>Status</th>
-                                                            <th class="text-center">Action</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                          <td>Project One</td>
-                                                          <td>Task 1</td>   
-                                                          <td><span class="badge bg-primary">Primary</span></td>
-                                                          <td>
-                                                           <div class="d-flex justify-content-center" style="gap: 10px;">
-                                                            <a href="" class="btn btn-warning">Update</a>
-                                                           </div>
-                                                          </td>
-                                                        </tr>
-                                                        <tr>
-                                                          <td>Project two</td>
-                                                          <td>Task 2</td>   
-                                                          <td><span class="badge bg-success">Primary</span></td>
-                                                          <td>
-                                                           <div class="d-flex justify-content-center" style="gap: 10px;">
-                                                            <a href="" class="btn btn-warning">Update</a>
-                                                           </div>
-                                                          </td>
-                                                        </tr>
-                                                    </tbody>
-                                                  </table>         
-                                            </div>   
-                                    </div>
-                                    
-                                    
-
-
-                                    <div id="styleSelector">
-
-                                    </div>
+                                  </div>
                                 </div>
+                              </div>
                             </div>
+                          </div>
                         </div>
-                    </div>
-                </div>
-                <div class="fixed-button">
-                    <a href="https://codedthemes.com/item/guru-able-admin-template/" target="_blank" class="btn btn-md btn-primary">
-                      <i class="fa fa-shopping-cart" aria-hidden="true"></i> Upgrade To Pro
-                    </a>
-                </div>
+                      </section>
             </div>
         </div>
 
@@ -338,7 +372,7 @@ var nav = $('.fixed-button');
               })
             setTimeout(()=>{
                 
-                window.location.href="/login-engineer" 
+                window.location.href="/login-admin" 
     
             },2000)
         }

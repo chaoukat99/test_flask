@@ -75,6 +75,15 @@ def index():
 @app.route("/admin-statistics")
 def statisticsadmin():
      return render_template("statistics-admin.html")
+@app.route("/admin-profile")
+def profileadmin():
+     return render_template("profile-admin.html")
+@app.route("/engineer-profile")
+def profileengineer():
+     return render_template("profile-engineer.html")
+@app.route("/pm-profile")
+def profilepm():
+     return render_template("profile-pm.html")
 @app.route("/pm-statistics")
 def statisticspm():
      return render_template("statistics-pm.html")
@@ -180,6 +189,13 @@ def check_log_admin():
         password= request.form["password"]
         cursor= mysql.connection.cursor()
         query= cursor.execute("SELECT * FROM admins WHERE email=%s AND pass=%s", (username,password))
+        cursor_chart= mysql.connection.cursor()
+        query_chart=cursor_chart.execute("""SELECT chef_projet.username AS chef_name , COUNT(projet.id_projet) as nb  FROM projet 
+          join chef_projet on chef_projet.id_chef_prj=projet.id_chef_trg GROUP BY chef_projet.username""")
+        if query_chart:
+             chart_1= cursor_chart.fetchall()
+             chart_1_array= list(chart_1)
+             chart_1_array.insert(0,["project managers","project's numbers"])
 
         # Statistics 
         cursor_admin=mysql.connection.cursor()
@@ -215,8 +231,11 @@ def check_log_admin():
                 session["count_chefs"]= chef_count            
                 session["count_eng"]= num_eng         
                 session["count_projet"]= num_prj  
+                session["chart_1_array"]= chart_1_array
 
                 return redirect("/admin-dash",302)
+                
+                
                
         else:
                 return """<body><script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">

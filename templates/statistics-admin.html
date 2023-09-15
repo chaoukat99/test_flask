@@ -33,10 +33,12 @@
       https://cdn.jsdelivr.net/npm/sweetalert2@11.7.11/dist/sweetalert2.all.min.js
       "></script>
       <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
       <style>
         rect {
             fill:transparent;
         }
+        
       </style>
   </head>
 
@@ -275,6 +277,8 @@
                                                 </div>
                                             </div>
                                             <div id="piechart_3d" style="width: 500px; height: 300px;"></div>
+                                            <div id="top_x_div" style="width: 450px; height: 300px;"></div>
+                                            
                                             <!-- card1 end -->
                                             <!-- Statestics Start -->
                                           
@@ -311,14 +315,7 @@
             google.charts.load("current", {packages:["corechart"]});
             google.charts.setOnLoadCallback(drawChart);
             function drawChart() {
-              var data = google.visualization.arrayToDataTable([
-                ['Task', 'Hours per Day'],
-                ['Work',     11],
-                ['Eat',      2],
-                ['Commute',  2],
-                ['Watch TV', 2],
-                ['Sleep',    7]
-              ]);
+              var data = google.visualization.arrayToDataTable("{{session['chart_1_array'][0]}}");
       
               var options = {
                 title: 'My Daily Activities',
@@ -330,50 +327,38 @@
             }
 
         </script>
-        <!-- Warning Section Starts -->
-        <!-- Older IE warning message -->
-    <!--[if lt IE 9]>
-<div class="ie-warning">
-    <h1>Warning!!</h1>
-    <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
-    <div class="iew-container">
-        <ul class="iew-download">
-            <li>
-                <a href="http://www.google.com/chrome/">
-                    <img src="assets/images/browser/chrome.png" alt="Chrome">
-                    <div>Chrome</div>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.mozilla.org/en-US/firefox/new/">
-                    <img src="assets/images/browser/firefox.png" alt="Firefox">
-                    <div>Firefox</div>
-                </a>
-            </li>
-            <li>
-                <a href="http://www.opera.com">
-                    <img src="assets/images/browser/opera.png" alt="Opera">
-                    <div>Opera</div>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.apple.com/safari/">
-                    <img src="assets/images/browser/safari.png" alt="Safari">
-                    <div>Safari</div>
-                </a>
-            </li>
-            <li>
-                <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
-                    <img src="assets/images/browser/ie.png" alt="">
-                    <div>IE (9 & above)</div>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <p>Sorry for the inconvenience!</p>
-</div>
-<![endif]-->
-<!-- Warning Section Ends -->
+        <script type="text/javascript">
+            google.charts.load('current', {'packages':['bar']});
+            google.charts.setOnLoadCallback(drawStuff);
+      
+            function drawStuff() {
+              var data = new google.visualization.arrayToDataTable([
+                ['Opening Move', 'Percentage'],
+                ["King's pawn (e4)", 3],
+                ["Queen's pawn (d4)", 10],
+                ["Knight to King 3 (Nf3)", 12],
+                ["Queen's bishop pawn (c4)", 31],
+                ['Other', 44]
+              ]);
+      
+              var options = {
+
+                width: 600,
+                legend: { position: 'none' },
+                bars: 'horizontal', // Required for Material Bar Charts.
+                axes: {
+                  x: {
+                    0: { side: 'top', label: 'Percentage'} // Top x-axis.
+                  }
+                },
+                bar: { groupWidth: "90%" }
+              };
+      
+              var chart = new google.charts.Bar(document.getElementById('top_x_div'));
+              chart.draw(data, options);
+            };
+          </script>
+        
 <!-- Required Jquery -->
 <script type="text/javascript" src="{{url_for('static', filename='assets/js/jquery/jquery.min.js')}}"></script>
 <script type="text/javascript" src="{{url_for('static', filename='assets/js/jquery-ui/jquery-ui.min.js')}}"></script>
