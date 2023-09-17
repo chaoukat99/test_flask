@@ -315,7 +315,7 @@
             google.charts.load("current", {packages:["corechart"]});
             google.charts.setOnLoadCallback(drawChart);
             function drawChart() {
-              var data = google.visualization.arrayToDataTable("{{session['chart_1_array'][0]}}");
+              var data = google.visualization.arrayToDataTable("{{ session['chart_1_array'][0]}} ");
       
               var options = {
                 title: 'My Daily Activities',

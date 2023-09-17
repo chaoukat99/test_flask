@@ -306,6 +306,26 @@ def check_log_engineer():
         },1000)
         </script><h1 style='display:none'>you are not allowed</h1></body>
                 """
+        
+
+
+@app.route("/delete-projet")
+def del_projet():
+     param_url=request.args.get("id_prj")  
+
+     cursor_delete=mysql.connection.cursor()
+     query=cursor_delete.execute("DELETE FROM projet WHERE id_projet=%s",(param_url))
+     if query:
+
+        project_cursor=mysql.connection.cursor()
+        all_projects_query=project_cursor.execute("""SELECT projet.id_projet , projet.nom_projet ,ingenieur.nom_complet,status , projet.date_debut ,projet.date_fin FROM projet 
+JOIN tache on tache.id_projet = projet.id_projet JOIN ingenieur on ingenieur.id_ing = tache.id_ing WHERE projet.id_chef_trg=%s""",(str(session["pm_data"][0][0])))
+        if all_projects_query:
+          r_project=project_cursor.fetchall()
+          array_of_p=dictt(r_project)
+               #   return redirect(url_for(".dashpm",projects=array_of_p)) 
+          session["data"]=array_of_p  
+          return redirect(url_for("dashpm"))    
 @app.route('/check-projectmanager-login', methods=["POST"])
 def check_log_prpjectmanager():
     if request.method== "POST":
@@ -346,6 +366,8 @@ JOIN tache on tache.id_projet = projet.id_projet JOIN ingenieur on ingenieur.id_
                #   return jsonify(dictt(r_project))
 
          
+
+
 
 
             # return redirect("/projectmanager-dash",302)
