@@ -314,8 +314,9 @@
         <script>
             google.charts.load("current", {packages:["corechart"]});
             google.charts.setOnLoadCallback(drawChart);
+            let json_data=JSON.parse('{{ data }}')
             function drawChart() {
-              var data = google.visualization.arrayToDataTable("{{ session['chart_1_array'][0]}} ");
+              var data = google.visualization.arrayToDataTable('{{ session["data_sessio n"] }}');
       
               var options = {
                 title: 'My Daily Activities',

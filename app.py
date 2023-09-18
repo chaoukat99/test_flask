@@ -1,4 +1,5 @@
 from flask import Flask, render_template,session, redirect, jsonify,url_for,request,get_flashed_messages , flash
+import json
 from flask_mysqldb import MySQL
 import secrets
 app = Flask(__name__)
@@ -74,7 +75,22 @@ def index():
     return render_template("home.html")
 @app.route("/admin-statistics")
 def statisticsadmin():
-     return render_template("statistics-admin.html")
+      cursor_chart= mysql.connection.cursor()
+      query_chart=cursor_chart.execute("""SELECT chef_projet.username AS chef_name , COUNT(projet.id_projet) as nb  FROM projet 
+          join chef_projet on chef_projet.id_chef_prj=projet.id_chef_trg GROUP BY chef_projet.username""")
+      if query_chart:
+             chart_1= cursor_chart.fetchall()
+             chart_1_array=list(chart_1)
+             final_data=[list(t) for t in chart_1_array]
+             json_data=json.dumps(final_data)
+             session["data_session"]=final_data
+          #    chart_1_array.insert(0,["project managers","project's numbers"])
+          #    return render_template("statistics-admin.html")
+             
+             return render_template("statistics-admin.html")
+            
+             return "shshs"
+      
 @app.route("/admin-profile")
 def profileadmin():
      return render_template("profile-admin.html")
@@ -189,13 +205,7 @@ def check_log_admin():
         password= request.form["password"]
         cursor= mysql.connection.cursor()
         query= cursor.execute("SELECT * FROM admins WHERE email=%s AND pass=%s", (username,password))
-        cursor_chart= mysql.connection.cursor()
-        query_chart=cursor_chart.execute("""SELECT chef_projet.username AS chef_name , COUNT(projet.id_projet) as nb  FROM projet 
-          join chef_projet on chef_projet.id_chef_prj=projet.id_chef_trg GROUP BY chef_projet.username""")
-        if query_chart:
-             chart_1= cursor_chart.fetchall()
-             chart_1_array= list(chart_1)
-             chart_1_array.insert(0,["project managers","project's numbers"])
+       
 
         # Statistics 
         cursor_admin=mysql.connection.cursor()
@@ -231,7 +241,7 @@ def check_log_admin():
                 session["count_chefs"]= chef_count            
                 session["count_eng"]= num_eng         
                 session["count_projet"]= num_prj  
-                session["chart_1_array"]= chart_1_array
+                
 
                 return redirect("/admin-dash",302)
                 
@@ -312,17 +322,21 @@ def del_projet():
 
      cursor_delete=mysql.connection.cursor()
      query=cursor_delete.execute("DELETE FROM projet WHERE id_projet=%s",(param_url))
-     if query:
-
-        project_cursor=mysql.connection.cursor()
-        all_projects_query=project_cursor.execute("""SELECT projet.id_projet , projet.nom_projet ,ingenieur.nom_complet,status , projet.date_debut ,projet.date_fin FROM projet 
+     if query :
+           mysql.connection.commit()
+           cursor_delete.close()
+          
+           project_cursor=mysql.connection.cursor()
+           all_projects_query=project_cursor.execute("""SELECT projet.id_projet , projet.nom_projet ,ingenieur.nom_complet,status , projet.date_debut ,projet.date_fin FROM projet 
 JOIN tache on tache.id_projet = projet.id_projet JOIN ingenieur on ingenieur.id_ing = tache.id_ing WHERE projet.id_chef_trg=%s""",(str(session["pm_data"][0][0])))
-        if all_projects_query:
-          r_project=project_cursor.fetchall()
-          array_of_p=dictt(r_project)
-               #   return redirect(url_for(".dashpm",projects=array_of_p)) 
-          session["data"]=array_of_p  
-          return redirect(url_for("dashpm"))    
+           if all_projects_query:
+                 r_project=project_cursor.fetchall()
+                 array_of_p=dictt(r_project)
+                 session["data"]=array_of_p 
+           
+           return redirect(url_for("dashpm"))   
+
+       
 @app.route('/check-projectmanager-login', methods=["POST"])
 def check_log_prpjectmanager():
     if request.method== "POST":
@@ -358,7 +372,7 @@ JOIN tache on tache.id_projet = projet.id_projet JOIN ingenieur on ingenieur.id_
                  array_of_p=dictt(r_project)
                #   return redirect(url_for(".dashpm",projects=array_of_p)) 
                  session["data"]=array_of_p
-                 return redirect(url_for('dashpm')) 
+            return redirect(url_for('dashpm')) 
                  
                #   return jsonify(dictt(r_project))
 
