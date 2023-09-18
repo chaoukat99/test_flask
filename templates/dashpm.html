@@ -267,7 +267,10 @@
                                                             <td>{{ i["date_fin"] }}</td>
                                                             <td><div class="d-flex justify-content-center" style="gap: 10px;">
                                                                 <a href="" class="btn btn-warning">Update</a>
-                                                                <a href="javascript:if(confirm('Are you sure you want to proceed?')){window.location.href='/delete-projet?id_prj={{ i['id'] }}'};" class="btn btn-danger">delete</a>
+
+                                                               
+                                                                <a href="/delete-projet?id_prj={{  i['id'] }}" class="btn btn-danger">delete</a>
+
                                                                </div>
                                                             </td>   
                                                              
