@@ -32,18 +32,6 @@
       <script src="
       https://cdn.jsdelivr.net/npm/sweetalert2@11.7.11/dist/sweetalert2.all.min.js
       "></script>
-      <style>
-      .gradient-custom {
-        /* fallback for old browsers */
-        background: #073f59;
-        
-        /* Chrome 10-25, Safari 5.1-6 */
-        background: -webkit-linear-gradient(to right bottom, #073f59, #165979);
-        
-        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-        background: linear-gradient(to right bottom, #073f59, #165979)
-        }
-        </style>
   </head>
 
   <body>
@@ -99,7 +87,7 @@
                                         Notifications 
                                     </button>
                                     <li>
-                                        <a href="#">
+                                        <a href="/admin-profile">
                                             <i class="ti-user"></i> Profile
                                         </a>
                                     </li>
@@ -142,16 +130,9 @@
                                     <ul class="pcoded-submenu">
                                         
                                         <li class=" ">
-                                            <a href="button.html">
+                                            <a href="/show_engineers">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Show engineers</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-                                        <li class=" ">
-                                            <a href="tabs.html">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Delete engineer</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
@@ -210,13 +191,6 @@
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="/show-project">
-                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Show Projects</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
                               
                                 
                             </ul>
@@ -225,62 +199,45 @@
                                 
                             </ul>
                     </nav>
-                    <div class="d-flex justify-content-center align-items-center" style="width: 100%;">
-                        <section class="vh-100" style="background-color: #f4f5f7; margin: 0 auto;"> 
-                            <div class="container py-5 h-100" >
-                              <div class="row d-flex justify-content-center h-100">
-                                <div class="col col-lg-10 mb-4 mb-lg-0">
-                                  <div class="card mb-3" style="border-radius: .5rem;">
-                                    <div class="row g-0">
-                                      <div class="col-md-4 gradient-custom text-center text-white"
-                                        style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
-                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
-                                          alt="Avatar" class="img-fluid my-5" style="width: 100px;" />
-                                        <h5 style="font-weight: bold;">{{session["admin_data"][0][4]}}</h5>
-                                        <p>Admin</p>
-                                        <i class="far fa-edit mb-5"></i>
-                                      </div>
-                                      <div class="col-md-8">
-                                        <div class="card-body p-4">
-                                          <h6 style="font-weight: bold;">Information</h6>
-                                          <hr class="mt-0 mb-4">
-                                          <div class="row pt-1">
-                                            <div class="col-6 mb-3">
-                                              <h6>Email</h6>
-                                              <p class="text-muted">{{session["admin_data"][0][1]}}</p>
-                                            </div>
-                                            <div class="col-6 mb-3">
-                                              <h6>Phone</h6>
-                                              <p class="text-muted">{{session["admin_data"][0][5]}}</p>
-                                            </div>
-                                          </div>
-                                          <h6>Projects</h6>
-                                          <hr class="mt-0 mb-4">
-                                          <div class="row pt-1">
-                                            <div class="col-6 mb-3">
-                                              <h6>Recent</h6>
-                                              <p class="text-muted">Lorem ipsum</p>
-                                            </div>
-                                            <div class="col-6 mb-3">
-                                              <h6>Most Viewed</h6>
-                                              <p class="text-muted">Dolor sit amet</p>
-                                            </div>
-                                          </div>
-                                          <div class="d-flex justify-content-start">
-                                            <a href="#!"><i class="fab fa-facebook-f fa-lg me-3"></i></a>
-                                            <a href="#!"><i class="fab fa-twitter fa-lg me-3"></i></a>
-                                            <a href="#!"><i class="fab fa-instagram fa-lg"></i></a>
-                                          </div>
-                                        </div>
-                                      </div>
+                                    
+                                    <div class="d-flex justify-content-center">
+                                    <div class="card mt-5" style="width: 1000px; margin-left: 250px;">
+                                            <div class="table-responsive" >
+                                                  <table class="table table-hover">
+                                                    <thead class="bg-success">
+                                                        <tr>
+                                                            <th>Full name</th>
+                                                            <th>Email</th>
+                                                            <th>Phone number</th>
+                                                            <th>Department</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {%for i in session["all_pmanagers"]%}
+                                                        <tr>
+                                                        <td>{{i[1]}}</td>
+                                                        <td>{{i[6]}}</td>
+                                                        <td>{{i[5]}}</td>
+                                                        <td>{{i[3]}}</td>
+                                                    </tr>
+                                                        {% endfor %}
+                                                    </tbody>
+                                                  </table>         
+                                            </div>   
                                     </div>
-                                  </div>
                                 </div>
-                              </div>
+                                    
+
+
+                                    <div id="styleSelector">
+
+                                    </div>
+                                </div>
                             </div>
-                          </section>
+                        </div>
                     </div>
-                   
+                </div>
+            
             </div>
         </div>
 

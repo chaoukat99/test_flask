@@ -1,4 +1,4 @@
-<form>
+<!-- <form>
     <div class="form-group input-group">
       <div class="input-group-prepend">
         <span class="input-group-text"> <i class="fa fa-user"></i> </span>
@@ -26,4 +26,52 @@
     <div class="form-group">
       <button type="submit" class="btn btn-primary btn-block" disabled id="btn-submit"> Create  </button>
     </div>
-  </form>
+  </form> -->
+ 
+ 
+                <div class="card mt-5" style="width: 600px;">
+                    <div class="card-header">
+                        <h3 class="text-center">Create project manager</h3>
+                    </div>
+                    <div class="card-body">
+                        <form action="/add-pm" method="POST">
+                            <div class="form-group input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                              </div>
+                              <input name="fullname" class="form-control" placeholder="Full name" type="text">
+                            </div>
+                            <div class="form-group input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                              </div>
+                              <input name="email" class="form-control" placeholder="Email address" type="email">
+                            </div>
+
+                                <div class="input-group-prepend">
+                                </div>
+                                <select name="dep" class="form-control" id="">
+                                    <option value="">Departement </option>
+                                    <option value="IT">IT </option>
+                                    <option value="Marketing">Marketing </option>
+                                    <option value="Finance">Finance </option>
+                                </select>
+                                
+                              </div>
+                            <div class="form-group input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                              </div>
+                              <input class="form-control" name="password" placeholder="Create password" type="password" id="pass1">
+                            </div>
+                            <div class="form-group input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                              </div>
+                              <input class="form-control" placeholder="Repeat password" type="password" id="pass2">
+                            </div>
+                            <div class="form-group">
+                              <button type="submit" class="btn btn-primary btn-block" disabled id="btn-submit"> Create  </button>
+                            </div>
+                          </form>
+                    </div>
