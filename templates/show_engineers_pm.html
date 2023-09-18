@@ -37,7 +37,7 @@
   <body>
     <!-- Pre-loader start -->
    
-    {% if "admin_logged" in session and  session["admin_logged"] %}
+    {% if "pm_logged" in session and  session["pm_logged"] %}
     <!-- Pre-loader end -->
     <div id="pcoded" class="pcoded">
         <div class="pcoded-overlay-box"></div>
@@ -75,8 +75,8 @@
                          
                             <li class="user-profile header-notification">
                                 <a href="#!">
-                                    {%if "admin_data" in session and session["admin_data"] %}
-                                    <span>{{ session["admin_data"][0][4] }}</span>
+                                    {%if "pm_data" in session and session["pm_data"] %}
+                                    <span>{{ session["pm_data"][0][4] }}</span>
                                     <i class="ti-angle-down"></i>
                                 </a>
                                 {% endif %}
@@ -87,12 +87,12 @@
                                         Notifications 
                                     </button>
                                     <li>
-                                        <a href="/admin-profile">
+                                        <a href="/pm-profile">
                                             <i class="ti-user"></i> Profile
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="/deconn-admin">
+                                        <a href="/deconn-pm">
                                             <i class="ti-layout-sidebar-left"></i> Logout
                                         </a>
                                     </li>
@@ -115,7 +115,7 @@
                             <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Layout</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="active">
-                                    <a href="/admin-dash">
+                                    <a href="/projectmanager-dash">
                                         <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
                                         <span class="pcoded-mcaret"></span>
@@ -128,11 +128,17 @@
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
-                                        
                                         <li class=" ">
-                                            <a href="/show_engineers">
+                                            <a href="/create-ing">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Show engineers</span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Create engineer</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class=" ">
+                                            <a href="/show_engineers_pm">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Show engineer</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
@@ -152,56 +158,20 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)">
-                                        <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Manage project managers</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                    <ul class="pcoded-submenu">
-                                        <li class=" ">
-                                            <a href="/create-pm-admin">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">create project manager</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-                                        <li class=" ">
-                                            <a href="button.html">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Show project managers</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-                                        <li class=" ">
-                                            <a href="tabs.html">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Delete project managers</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-                                        <li class=" ">
-                                            <a href="color.html">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Report</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
+                        
                             </ul>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li>
-                                    <a href="/admin-statistics">
+                                    <a href="/pm-statistics">
                                         <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Statistics</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/show-project">
+                                    <a href="/create-project">
                                         <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Show Projects</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Create Project</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -213,95 +183,33 @@
                                 
                             </ul>
                     </nav>
-                                    <h2 class="text-center">Engineers</h2>
-                                    <div class="d-flex justify-content-center" style="width: 500; max-height: 700; overflow-y: auto;">
-                                            <div class="table-responsive">
-                                                  <table class="table table-hover">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Full name</th>
-                                                            <th>Email</th>
-                                                            <th>Phone number</th>
-                                                            <th>Department</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>   
-                                                          <td>tarik hamidi</td>
-                                                          <td>tarik@gmail.com</td>   
-                                                          <td>0659623556</td> 
-                                                          <td>IT</td>
-                                                        </tr>
-                                                        <tr>   
-                                                            <td>tarik hamidi</td>
-                                                            <td>tarik@gmail.com</td>   
-                                                            <td>0659623556</td> 
-                                                            <td>IT</td>
-                                                          </tr>
-                                                          <tr>   
-                                                            <td>tarik hamidi</td>
-                                                            <td>tarik@gmail.com</td>   
-                                                            <td>0659623556</td> 
-                                                            <td>IT</td>
-                                                          </tr>
-                                                          <tr>   
-                                                            <td>tarik hamidi</td>
-                                                            <td>tarik@gmail.com</td>   
-                                                            <td>0659623556</td> 
-                                                            <td>IT</td>
-                                                          </tr>
-                                                          <tr>   
-                                                            <td>tarik hamidi</td>
-                                                            <td>tarik@gmail.com</td>   
-                                                            <td>0659623556</td> 
-                                                            <td>IT</td>
-                                                          </tr>
-                                                          <tr>   
-                                                            <td>tarik hamidi</td>
-                                                            <td>tarik@gmail.com</td>   
-                                                            <td>0659623556</td> 
-                                                            <td>IT</td>
-                                                          </tr>
-                                                          <tr>   
-                                                            <td>tarik hamidi</td>
-                                                            <td>tarik@gmail.com</td>   
-                                                            <td>0659623556</td> 
-                                                            <td>IT</td>
-                                                          </tr>
-                                                        <tr>   
-                                                            <td>tarik hamidi</td>
-                                                            <td>tarik@gmail.com</td>   
-                                                            <td>0659623556</td> 
-                                                            <td>IT</td>
-                                                        <tr>   
-                                                            <td>tarik hamidi</td>
-                                                            <td>tarik@gmail.com</td>   
-                                                            <td>0659623556</td> 
-                                                            <td>IT</td>
-                                                        </tr>
-                                                        <tr>   
-                                                            <td>tarik hamidi</td>
-                                                            <td>tarik@gmail.com</td>   
-                                                            <td>0659623556</td> 
-                                                            <td>IT</td>
-                                                        </tr>
-                                                    </tbody>
-                                                  </table>         
-                                            </div>   
-                                    </div>
-                                    <ul class="pagination justify-content-center">
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <!-- Ajoutez plus de liens de pagination au besoin -->
-                                    </ul>
-                                    
-
-
-                                    <div id="styleSelector">
-
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="d-flex justify-content-center">
+                        <div class="card mt-5" style="width: 1000px; margin-left: 250px;">
+                                <div class="table-responsive" >
+                                      <table class="table table-hover">
+                                        <thead class="bg-danger">
+                                            <tr>
+                                                <th>Full name</th>
+                                                <th>Email</th>
+                                                <th>Phone number</th>
+                                                <th>Department</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {%for i in session["all_engineers"]%}
+                                            <tr>
+                                            <td>{{i[1]}}</td>
+                                            <td>{{i[2]}}</td>
+                                            <td>{{i[6]}}</td>
+                                            <td>{{i[3]}}</td>
+                                        </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                      </table>         
+                                </div>   
+                        </div>
+                    </div>
+                </div>
                         </div>
                     </div>
                 </div>
@@ -310,50 +218,6 @@
         </div>
 
         <!-- Warning Section Starts -->
-        <!-- Older IE warning message -->
-    <!--[if lt IE 9]>
-<div class="ie-warning">
-    <h1>Warning!!</h1>
-    <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
-    <div class="iew-container">
-        <ul class="iew-download">
-            <li>
-                <a href="http://www.google.com/chrome/">
-                    <img src="assets/images/browser/chrome.png" alt="Chrome">
-                    <div>Chrome</div>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.mozilla.org/en-US/firefox/new/">
-                    <img src="assets/images/browser/firefox.png" alt="Firefox">
-                    <div>Firefox</div>
-                </a>
-            </li>
-            <li>
-                <a href="http://www.opera.com">
-                    <img src="assets/images/browser/opera.png" alt="Opera">
-                    <div>Opera</div>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.apple.com/safari/">
-                    <img src="assets/images/browser/safari.png" alt="Safari">
-                    <div>Safari</div>
-                </a>
-            </li>
-            <li>
-                <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
-                    <img src="assets/images/browser/ie.png" alt="">
-                    <div>IE (9 & above)</div>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <p>Sorry for the inconvenience!</p>
-</div>
-<![endif]-->
-<!-- Warning Section Ends -->
-<!-- Required Jquery -->
 <script type="text/javascript" src="{{url_for('static', filename='assets/js/jquery/jquery.min.js')}}"></script>
 <script type="text/javascript" src="{{url_for('static', filename='assets/js/jquery-ui/jquery-ui.min.js')}}"></script>
 <script type="text/javascript" src="{{url_for('static', filename='assets/js/popper.js/popper.min.js')}}"></script>
@@ -400,7 +264,7 @@ var nav = $('.fixed-button');
               })
             setTimeout(()=>{
                 
-                window.location.href="/login-admin" 
+                window.location.href="/login-projectmanager" 
     
             },2000)
         }

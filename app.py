@@ -135,6 +135,25 @@ def add_ing():
          return jsonify("unsuccess")
 
 
+@app.route("/add-pm",methods=["POST"])
+def add_pm():
+     if request.method == "POST":
+        full_name = request.form["fullname"]
+        email = request.form["email"]
+        phone = request.form["phone number"]
+        password = request.form["password"]
+        dep = request.form["dep"]
+        cursor_insert1 = mysql.connection.cursor()
+        query = cursor_insert1.execute("INSERT INTO chef_projet(username,email,phone,departement,password) VALUES (%s,%s,%s,%s,%s )",(full_name, email, phone, dep, password))
+        if query:
+          mysql.connection.commit()
+          cursor_insert1.close()
+          return redirect(url_for("dashadmin",msg="Project manager Added Successfully"))
+        else:
+         cursor_insert1.close()
+         return jsonify("unsuccess")
+
+
 
 @app.route("/create-project")
 def create_p():
@@ -164,9 +183,9 @@ def store_project():
 @app.route("/test_in")
 def t_in():
      return render_template("Temp_eng.html")
-@app.route("/show-project")
-def showproject():
-     return render_template("show-project.html")
+@app.route("/show_pm")
+def show_pm():
+     return render_template("show_pm.html")
 @app.route("/engineer-dash")
 def dashengineer():
      return render_template("dashengineer.html")
@@ -182,9 +201,12 @@ def login_pm_view():
 @app.route("/error")
 def error():
     return render_template("error.html")
-@app.route("/show_engineers")
-def show_engineers():
-    return render_template("show_engineers.html")
+@app.route("/show_engineers_admin")
+def show_engineers_admin():
+    return render_template("show_engineers_admin.html")
+@app.route("/show_engineers_pm")
+def show_engineers_pm():
+    return render_template("show_engineers_pm.html")
 @app.route('/check-admin-login', methods=["POST"])
 def check_log_admin():
     if request.method== "POST":
@@ -205,7 +227,19 @@ def check_log_admin():
         query_cursor2=cursor_admin.execute("SELECT count(*) FROM admins")
         if query_cursor2:
              num_admin = cursor_admin.fetchall()
-
+        # engineers
+        cursor_engineer=mysql.connection.cursor()
+        query_cursor6=cursor_engineer.execute("SELECT * FROM ingenieur")  
+        if query_cursor6:
+             all_engineers= cursor_engineer.fetchall()
+             session["all_engineers"]=all_engineers
+        # all project managers
+        cursor_pm=mysql.connection.cursor()
+        query_cursor7=cursor_pm.execute("SELECT * FROM chef_projet")
+        if query_cursor7:
+             all_pmanagers= cursor_pm.fetchall()
+             session["all_pmanagers"]=all_pmanagers
+     
         #  Project Manager
         cursor_chef=mysql.connection.cursor()
         query_cursor3=cursor_chef.execute("SELECT count(*) FROM chef_projet")
@@ -333,6 +367,12 @@ def check_log_prpjectmanager():
         password= request.form["password"]
         cursor= mysql.connection.cursor()
         query= cursor.execute("SELECT * FROM chef_projet WHERE username=%s AND password=%s", (username, password))
+        # engineers
+        cursor_engineer=mysql.connection.cursor()
+        query_cursor6=cursor_engineer.execute("SELECT * FROM ingenieur")  
+        if query_cursor6:
+               all_engineers= cursor_engineer.fetchall()
+               session["all_engineers"]=all_engineers
         if query:
             result= cursor.fetchall()
             if result:
@@ -363,7 +403,7 @@ JOIN tache on tache.id_projet = projet.id_projet JOIN ingenieur on ingenieur.id_
                  session["data"]=array_of_p
                  return redirect(url_for('dashpm')) 
                  
-               #   return jsonify(dictt(r_project))
+         
 
          
 
