@@ -217,12 +217,28 @@ def login_pm_view():
 @app.route("/error")
 def error():
     return render_template("error.html")
+@app.route("/tasks")
+def tasks():
+    return render_template("tasks.html")
 @app.route("/show_engineers_admin")
 def show_engineers_admin():
     return render_template("show_engineers_admin.html")
 @app.route("/show_engineers_pm")
 def show_engineers_pm():
     return render_template("show_engineers_pm.html")
+@app.route("/create-project", methods=["POST"])
+def createproject():
+     if request.method== "POST":
+        project_name= request.form["p_name"]
+        dated= request.form["date_d"]
+        datef= request.form["date_f"]
+        cursor= mysql.connection.cursor()
+        query= cursor.execute("INSERT INTO projet(nom_projet,date_debut,date_fin,id_chef_trg) VALUES (%s,%s,%s,%s)",(project_name, dated, datef,session["pm_data"][0][0]))
+        if query:
+             mysql.connection.commit()
+             cursor.close()
+     return render_template("create_project.html")
+
 @app.route('/check-admin-login', methods=["POST"])
 def check_log_admin():
     if request.method== "POST":
@@ -370,8 +386,7 @@ JOIN tache on tache.id_projet = projet.id_projet JOIN ingenieur on ingenieur.id_
                  r_project=project_cursor.fetchall()
                  array_of_p=dictt(r_project)
                  session["data"]=array_of_p 
-           
-           return redirect(url_for("dashpm"))   
+                 return redirect(url_for("dashpm"))   
 
        
 @app.route('/check-projectmanager-login', methods=["POST"])
@@ -383,7 +398,7 @@ def check_log_prpjectmanager():
         query= cursor.execute("SELECT * FROM chef_projet WHERE username=%s AND password=%s", (username, password))
         # engineers
         cursor_engineer=mysql.connection.cursor()
-        query_cursor6=cursor_engineer.execute("SELECT * FROM ingenieur")  
+        query_cursor6=cursor_engineer.execute("SELECT * FROM ingenieur")
         if query_cursor6:
                all_engineers= cursor_engineer.fetchall()
                session["all_engineers"]=all_engineers

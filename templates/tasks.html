@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Dashboard</title>
+    <!-- HTML5 Shim and Respond.js IE9 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+      <!-- Meta -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="description" content="CodedThemes">
+      <meta name="keywords" content=" Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
+      <meta name="author" content="CodedThemes">
+      <!-- Favicon icon -->
+      <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+      <!-- Google font-->
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
+      <!-- Required Fremwork -->
+      <link rel="stylesheet" href="{{url_for('static', filename='assets/css/bootstrap/css/bootstrap.min.css')}}">
+      <!-- themify-icons line icon -->
+      <link rel="stylesheet" href="{{url_for('static', filename='assets/icon/themify-icons/themify-icons.css')}}"> 
+      <!-- ico font -->
+      <link rel="stylesheet" href="{{url_for('static', filename='assets/icon/icofont/css/icofont.css')}}"> 
+      <!-- Style.css -->
+      <link rel="stylesheet" href="{{url_for('static', filename='assets/css/style.css')}}">
+      <link rel="stylesheet" href="{{url_for('static', filename='assets/css/jquery.mCustomScrollbar.css')}}">
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.11/dist/sweetalert2.all.min.js">
+
+      </script>
+  </head>
+
+  <body>
+    <!-- Pre-loader start -->
+   
+    <!-- Pre-loader end -->
+    {% if "pm_logged" in session and "pm_data" in session  and  session["pm_logged"] %}
+    <div id="pcoded" class="pcoded">
+        <div class="pcoded-overlay-box"></div>
+        <div class="pcoded-container navbar-wrapper">
+
+         {% include 'profile_nav_pm.html' %}
+            <div class="pcoded-main-container">
+                <div class="pcoded-wrapper">
+                   {% include 'Links_nav_pm.html'%}
+                    <div class="pcoded-content">
+                        <div class="pcoded-inner-content">
+                            <div class="main-body d-flex justify-content-center " >
+                                
+                                    <div class="card mt-5" style="width: 600px;">
+                                        <div class="card-header">
+                                            <h3 class="text-center">Tasks </Em></h3>
+                                        </div>
+                                        <div class="card-body">
+                                           {% include 'form_create_tasks.html' %}
+                                        </div>
+
+                                      </div>
+                                    
+                                  
+
+
+                                    <div id="styleSelector">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Warning Section Starts -->
+      
+<!-- Required Jquery -->
+<script type="text/javascript" src="{{url_for('static', filename='assets/js/jquery/jquery.min.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='assets/js/jquery-ui/jquery-ui.min.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='assets/js/popper.js/popper.min.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='assets/js/bootstrap/js/bootstrap.min.js')}}"></script>
+<!-- jquery slimscroll js -->
+<script type="text/javascript" src="{{url_for('static', filename='assets/js/jquery-slimscroll/jquery.slimscroll.js')}}"></script>
+<!-- modernizr js -->
+<script type="text/javascript" src="{{url_for('static', filename='assets/js/modernizr/modernizr.js')}}"></script>
+<!-- am chart -->
+<script src="{{url_for('static', filename='assets/pages/widget/amchart/amcharts.min.js')}}"></script>
+<script src="{{url_for('static', filename='assets/pages/widget/amchart/serial.min.js')}}"></script>
+<!-- Todo js -->
+<script type="text/javascript " src="{{url_for('static', filename='assets/pages/todo/todo.js ')}}"></script>
+<!-- Custom js -->
+<script type="text/javascript" src="{{url_for('static', filename='assets/pages/dashboard/custom-dashboard.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='assets/js/script.js')}}"></script>
+<script type="text/javascript " src="{{url_for('static', filename='assets/js/SmoothScroll.js')}}"></script>
+<script src="{{url_for('static', filename='assets/js/pcoded.min.js')}}"></script>
+<script src="{{url_for('static', filename='assets/js/demo-12.js')}}"></script>
+<script src="{{url_for('static', filename='assets/js/jquery.mCustomScrollbar.concat.min.js')}}"></script>
+<script>
+var $window = $(window);
+var nav = $('.fixed-button');
+    $window.scroll(function(){
+        if ($window.scrollTop() >= 200) {
+         nav.addClass('active');
+     }
+     else {
+         nav.removeClass('active');
+     }
+ });
+</script>
+{% else %}
+   
+    <script>
+        
+        window.onload=function(){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Access Denied !! ',
+                showConfirmButton: false,
+                timer: 1500
+              })
+            setTimeout(()=>{
+                
+                window.location.href="/login-projectmanager" 
+    
+            },2000)
+        }
+        
+    </script>
+    {% endif %}
+</body>
+
+</html>
