@@ -217,9 +217,34 @@ def login_pm_view():
 @app.route("/error")
 def error():
     return render_template("error.html")
+@app.route("/add_task",methods=["POST"])
+def addtask():
+     
+    if request.method== "POST":
+         project_name= request.form["p_name"]
+         engineer= request.form["engineer"]
+         dated= request.form["date_d"]
+         datef= request.form["date_f"]
+         description= request.form["des"]
+         cursor3= mysql.connection.cursor()
+         query3= cursor3.execute("INSERT INTO tache(id_projet,id_ing,date_debut,date_fin,libelle) VALUES (%s,%s,%s,%s,%s)",(project_name, engineer, dated, datef ,description))
+         if query3:
+                    mysql.connection.commit()
+                    cursor3.close()
+                    return redirect(url_for("dashpm",msg=f"task assigned to engineer with id {engineer}"))
 @app.route("/tasks")
 def tasks():
-    return render_template("tasks.html")
+    # projet
+    cursor1= mysql.connection.cursor()
+    query1=cursor1.execute("SELECT projet.id_projet, projet.nom_projet FROM projet WHERE id_chef_trg=%s",str(session["pm_data"][0][0]))
+    if query1:
+         project=cursor1.fetchall()
+    # engineer
+    cursor2= mysql.connection.cursor()
+    query2=cursor2.execute("SELECT ingenieur.id_ing, ingenieur.nom_complet FROM ingenieur")
+    if query2:
+         ingenieur1=cursor2.fetchall()
+    return render_template("tasks.html",projects=project,ing=ingenieur1)
 @app.route("/show_engineers_admin")
 def show_engineers_admin():
     return render_template("show_engineers_admin.html")
