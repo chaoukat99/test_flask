@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Dashboard</title>
+    <title>Dashboard-Projectmanager</title>
     <!-- HTML5 Shim and Respond.js IE9 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -29,16 +29,28 @@
       <!-- Style.css -->
       <link rel="stylesheet" href="{{url_for('static', filename='assets/css/style.css')}}">
       <link rel="stylesheet" href="{{url_for('static', filename='assets/css/jquery.mCustomScrollbar.css')}}">
-      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.11/dist/sweetalert2.all.min.js">
+      <script src=" https://cdn.jsdelivr.net/npm/sweetalert2@11.7.11/dist/sweetalert2.all.min.js"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
-      </script>
+
+
+
   </head>
 
   <body>
-    <!-- Pre-loader start -->
-    {% if "pm_logged" in session and "pm_data" in session  and  session["pm_logged"] %}
 
+    {% if "pm_logged" in session and "pm_data" in session  and  session["pm_logged"] %}
+    <!-- Pre-loader start -->
+   
     <!-- Pre-loader end -->
+    {% if msg %}
+    <div class="d-flex justify-content-center">
+        <div class="alert alert-success " style="position: absolute;z-index: 999999;">
+            {{ msg }}
+        </div>
+    </div>
+
+    {% endif %}
     <div id="pcoded" class="pcoded">
         <div class="pcoded-overlay-box"></div>
         <div class="pcoded-container navbar-wrapper">
@@ -83,12 +95,12 @@
                                 <ul class="show-notification profile-notification">
                                 
                                     <li>
-                                        <a href="#">
+                                        <a href="/pm-profile">
                                             <i class="ti-user"></i> Profile
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="auth-normal-sign-in.html">
+                                        <a href="/deconn-pm">
                                             <i class="ti-layout-sidebar-left"></i> Logout
                                         </a>
                                     </li>
@@ -111,7 +123,7 @@
                             <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Layout</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="active">
-                                    <a href="/admin-dash">
+                                    <a href="/projectmanager-dash">
                                         <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
                                         <span class="pcoded-mcaret"></span>
@@ -125,23 +137,23 @@
                                     </a>
                                     <ul class="pcoded-submenu">
                                         <li class=" ">
-                                            <a href="/create_ing">
+                                            <a href="/create-ing">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Create engineers</span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Create engineer</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class=" ">
                                             <a href="/show_engineers_pm">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Show engineers</span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Show engineer</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class=" ">
-                                            <a href="tabs.html">
+                                            <a href="/delete_eng">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Delete engineers</span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Delete engineer</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
@@ -154,9 +166,8 @@
                                         </li>
                                     </ul>
                                 </li>
+                        
                             
-                            </ul>
-                            <ul class="pcoded-item pcoded-left-item">
                                 <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)">
                                         <span class="pcoded-micon" style="background-color: rgb(63, 167, 7);"><i class="icofont icofont-warning-alt  card1-icon"></i></span>
@@ -187,98 +198,73 @@
                                         </li>
                                     </ul>
                                 </li>
-                                
+                           
                                 <li>
                                     <a href="/pm-statistics">
-                                        <span class="pcoded-micon" style="background-color: #FFB64D;"><i class="ti-layers"></i><b>FC</b></span>
+                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Statistics</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li>
+                                
+                                <!-- <li>
                                     <a href="/tasks">
-                                        <span class="pcoded-micon" style="background-color: rgb(139, 139, 144);"><i class="ti-layers"></i><b>FC</b></span>
+                                        <span class="pcoded-micon"><i class="ti-layers bg-c-green"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">tasks</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
+                                </li> -->
+                                <li class="active">
+                                    <a href="/tasks">
+                                        <span class="pcoded-micon" style="background-color: rgb(139, 139, 144);"><i class="ti-layers"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Tasks</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
                                 </li>
-                            </ul>
+                                <li class="active">
+                                    <a href="/report" id="report">
+                                        <span class="pcoded-micon" style="background-color: #39ADB5;;"><i class="fa-regular fa-folder"></i><b>C</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Report</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                                
                             
+
+                            </ul>            
                                 
-                            </ul>
+                            
                     </nav>
-                    <div class="pcoded-content">
-                        <div class="pcoded-inner-content">
-                            <div class="main-body d-flex justify-content-center " >
-                                
-                                    <div class="card mt-5" style="width: 600px;">
-                                        <div class="card-header">
-                                            <h3 class="text-center">Create engineer</h3>
-                                        </div>
-                                        <div class="card-body">
-                                            <form action="/add-ing" method="POST">
-                                                <div class="form-group input-group">
-                                                  <div class="input-group-prepend">
-                                                    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
-                                                  </div>
-                                                  <input name="fullname" class="form-control" placeholder="Full name" type="text">
-                                                </div>
-                                                <div class="form-group input-group">
-                                                  <div class="input-group-prepend">
-                                                    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
-                                                  </div>
-                                                  <input name="email" class="form-control" placeholder="Email address" type="email">
-                                                </div>
-
-                                                    <div class="input-group-prepend">
-                                                    </div>
-                                                    <select name="dep" class="form-control" id="">
-                                                        <option value="">Departement </option>
-                                                        <option value="IT">IT </option>
-                                                        <option value="Marketing">Marketing </option>
-                                                        <option value="Finance">Finance </option>
-                                                    </select>
-                                                    
-                                                  </div>
-                                                <div class="form-group input-group">
-                                                  <div class="input-group-prepend">
-                                                    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-                                                  </div>
-                                                  <input class="form-control" name="password" placeholder="Create password" type="password" id="pass1">
-                                                </div>
-                                                <div class="form-group input-group">
-                                                  <div class="input-group-prepend">
-                                                    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-                                                  </div>
-                                                  <input class="form-control" placeholder="Repeat password" type="password" id="pass2">
-                                                </div>
-                                                <div class="form-group">
-                                                  <button type="submit" class="btn btn-primary btn-block" style="background-color: #FC6180;" id="btn-submit"> Create  </button>
-                                                </div>
-                                              </form>
-                                        </div>
-
-                                      </div>
-                                    
-                                    <script>
-                                        let pass1 = document.querySelector("#pass1")
-                                        let pass2 = document.querySelector("#pass2")
-                                        let btn = document.querySelector("#btn-submit")
-                                        pass2.onblur=()=>{
-                                          if(pass1.value!==pass2.value){
-                                             btn.disabled=true 
-                                          }else{
-                                            btn.disabled=false
-                                          }
-                                        } 
-                                    </script>
-
-
-                                    <div id="styleSelector">
-
-                                    </div>
-                                </div>
-                            </div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <div class="card mt-5" style="width: 1000px; margin-left: 250px;">
+                                <div class="table-responsive" >
+                                      <table class="table table-hover">
+                                        <thead style="background-color: rgb(139, 139, 144);">
+                                            <tr>
+                                                <th style="color: rgb(255, 255, 255);">id</th>
+                                                <th style="color: rgb(255, 255, 255);">Engeneer</th>
+                                                <th style="color: rgb(255, 255, 255);">Begin date</th>
+                                                <th style="color: rgb(255, 255, 255);">End date</th>
+                                                <th style="color: rgb(255, 255, 255);">Description</th>
+                                                <th style="color: rgb(255, 255, 255);">Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {%for i in session["task"]%}
+                                            <tr>
+                                            <td>{{i[0]}}</td>
+                                            <td>{{i[2]}}</td>
+                                            <td>{{i[4]}}</td>
+                                            <td>{{i[5]}}</td>
+                                            <td>{{i[1]}}</td>
+                                            <td><span class="badge bg-primary">{{i[6]}}</span></td>
+                                            
+                                        </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                      </table>         
+                                </div>   
                         </div>
                     </div>
                 </div>

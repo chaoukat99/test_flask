@@ -193,9 +193,38 @@ def store_project():
         return jsonify("unsuccess")
 
 
-
-
-
+@app.route("/delete_project")
+def project():
+      cursor1= mysql.connection.cursor()
+      query1=cursor1.execute("SELECT projet.id_projet, projet.nom_projet FROM projet WHERE id_chef_trg=%s",str(session["pm_data"][0][0]))
+      if query1:
+         project=cursor1.fetchall()
+         return render_template("delete_project.html",project=project)
+@app.route("/trigger_delete", methods=["POST", "DELETE"])
+def delete():
+     cursor1= mysql.connection.cursor()
+     query1=cursor1.execute("SELECT projet.id_projet, projet.nom_projet FROM projet WHERE id_chef_trg=%s",str(session["pm_data"][0][0]))
+     if query1:
+         project=cursor1.fetchall()
+         cursor_delete=mysql.connection.cursor()
+         
+     id_p= request.form["p_name"]
+     query2=cursor_delete.execute("DELETE FROM projet WHERE id_projet=%d",(int(id_p)))
+     if query2 :
+           mysql.connection.commit()
+           cursor_delete.close()
+           return render_template("delete_project.html", project=project)
+@app.route("/show_project")
+def show_project():
+     cursor_task=mysql.connection.cursor()
+     query_cursor6=cursor_task.execute("SELECT * FROM tache")  
+     if query_cursor6:
+             task= cursor_task.fetchall()
+             session["task"]=task
+     return render_template("show_project.html")     
+@app.route("/report")
+def report():
+     return render_template("report.html")
 @app.route("/test_in")
 def t_in():
      return render_template("Temp_eng.html")
@@ -290,7 +319,12 @@ def check_log_admin():
         if query_cursor7:
              all_pmanagers= cursor_pm.fetchall()
              session["all_pmanagers"]=all_pmanagers
-     
+        # all projects
+        cursor_projects=mysql.connection.cursor()
+        query_cursor9=cursor_pm.execute("SELECT * FROM projet")
+        if query_cursor9:
+             all_projects= cursor_pm.fetchall()
+             session["all_projects"]=all_projects
         #  Project Manager
         cursor_chef=mysql.connection.cursor()
         query_cursor3=cursor_chef.execute("SELECT count(*) FROM chef_projet")
@@ -394,7 +428,7 @@ def check_log_engineer():
         
 
 
-@app.route("/delete-projet")
+@app.route("/delete")
 def del_projet():
      param_url=request.args.get("id_prj")  
 

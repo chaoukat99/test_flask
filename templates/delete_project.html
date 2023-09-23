@@ -44,76 +44,22 @@
         <div class="pcoded-container navbar-wrapper">
 
          {% include 'profile_nav_pm.html' %}
-            <div class="pcoded-main-container">
+            <div class="pcoded-main-container" id="con">
                 <div class="pcoded-wrapper">
                    {% include 'Links_nav_pm.html'%}
                     <div class="pcoded-content">
                         <div class="pcoded-inner-content">
                             <div class="main-body d-flex justify-content-center " >
                                 
-                                    <div class="card mt-5" style="width: 600px;">
+                                    <div class="card" id="delete" style="width: 800px; margin-top: 200px;">
                                         <div class="card-header">
-                                            <h3 class="text-center">Tasks </Em></h3>
+                                            <h3 class="text-center"> </Em></h3>
                                         </div>
                                         <div class="card-body">
-                                <!-- start form  -->
-                                <div>
-                                    <div class="card-body">
-                                        <form action="/add_task" method="POST">
-                                            <div class="input-group-prepend">
-                                                
-                                                <select name="p_name" class="form-control" id="">
-                                                    <option value="">Project </option>
-                                                    {%for i in projects%}
-                                                    <option value="{{i[0]}}">{{i[1]}}</option>
-                                                    {% endfor %}
-                                                </select>
-                                                
-                                            </div>
-                                            <div class="input-group-prepend">
-                                                
-                                                <select name="engineer" class="form-control" id="">
-                                                    <option value="">Engineer </option>
-                                                    {%for i in ing%}
-                                                    <option value="{{i[0]}}">{{i[1]}}</option>
-                                                    {% endfor %}
-                                                </select>
-                                                
-                                            </div>
-                                            <div class="form-group input-group">
-                                                <div class="input-group-prepend">
-                                                <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
-                                            </div>
-                                                <input name="date_d" class="form-control" placeholder="start date" type="date">
-                                            </div>
-                                            <div class="form-group input-group">
-                                                <div class="input-group-prepend">
-                                                <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-                                            </div>
-                                                <input class="form-control" name="date_f" placeholder="End date" type="date" >
-                                            </div>
-                                            <div class="form-group input-group">
-                                                <div class="input-group-prepend">
-                                                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
-                                                </div>
-                                                <input name="des" class="form-control" placeholder="Task description" type="text">
-                                            </div>
-                                            <div class="form-group">
-                                                <button type="submit" class="btn btn-primary btn-block" style="background-color: rgb(139, 139, 144);" id="btn-submit"> Create  </button>
-                                              </div>
-                                          </form>
-                                    </div>
-
-
-
-                                <!-- end form -->
+                                           {% include 'form_delete_project.html' %}
                                         </div>
 
-                                      </div>
-                                    
-                                  
-
-
+                                    </div>
                                     <div id="styleSelector">
 
                                     </div>
@@ -124,9 +70,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Warning Section Starts -->
-      
 <!-- Required Jquery -->
 <script type="text/javascript" src="{{url_for('static', filename='assets/js/jquery/jquery.min.js')}}"></script>
 <script type="text/javascript" src="{{url_for('static', filename='assets/js/jquery-ui/jquery-ui.min.js')}}"></script>

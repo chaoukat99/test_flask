@@ -30,6 +30,11 @@
       <link rel="stylesheet" href="{{url_for('static', filename='assets/css/style.css')}}">
       <link rel="stylesheet" href="{{url_for('static', filename='assets/css/jquery.mCustomScrollbar.css')}}">
       <script src=" https://cdn.jsdelivr.net/npm/sweetalert2@11.7.11/dist/sweetalert2.all.min.js"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+
+
+
   </head>
 
   <body>
@@ -146,52 +151,75 @@
                                             </a>
                                         </li>
                                         <li class=" ">
-                                            <a href="tabs.html">
+                                            <a href="/delete_eng">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Delete engineer</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-                                        <li class=" ">
-                                            <a href="color.html">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Report</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                     </ul>
                                 </li>
                         
-                            </ul>
-                            <ul class="pcoded-item pcoded-left-item">
+                            
+                                <li class="pcoded-hasmenu">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon" style="background-color: rgb(63, 167, 7);"><i class="fa-solid fa-list-check"></i></i></span>
+                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Manage projects</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+                                        <li class=" ">
+                                            <a href="/create-ing">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Create projects</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class=" ">
+                                            <a href="/delete_project">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Delete projects</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                           
                                 <li>
                                     <a href="/pm-statistics">
-                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                        <span class="pcoded-micon"><i class="fa-solid fa-chart-pie"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Statistics</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="/create-project">
-                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Create Project</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li>
+                                
+                                <!-- <li>
                                     <a href="/tasks">
-                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                        <span class="pcoded-micon"><i class="ti-layers bg-c-green"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">tasks</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
+                                </li> -->
+                                <li class="active">
+                                    <a href="/tasks">
+                                        <span class="pcoded-micon" style="background-color: rgb(139, 139, 144);"><i class="ti-layers"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Tasks</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
                                 </li>
-                              
+                                <li class="active">
+                                    <a href="/report" id="report">
+                                        <span class="pcoded-micon" style="background-color: #39ADB5;;"><i class="fa-regular fa-folder"></i><b>C</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Report</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
                                 
-                            </ul>
-
                             
+
+                            </ul>            
                                 
-                            </ul>
+                            
                     </nav>
                     <div class="pcoded-content">
                         <div class="pcoded-inner-content">
@@ -272,12 +300,13 @@
                                                             <td><span class="badge bg-primary">{{ i["status"] }}</span></td>
                                                             <td>{{ i["date_debut"] }}</td>
                                                             <td>{{ i["date_fin"] }}</td>
-                                                            <td><div class="d-flex justify-content-center" style="gap: 10px;">
-                                                                <a href="" class="btn btn-warning">Update</a>
+                                                            <td><div class="d-flex justify-content-center " style="gap: 10px;">
+                                                                <a href="/show_project" class="btn btn-outline-info"><i class="fa-solid fa-eye"></i></a>
+                                                                <a href="" class="btn btn-outline-warning "><i class="fa-solid fa-pen-to-square"></i></a>
 
                                                                
-                                                                <a href="/delete-projet?id_prj={{  i['id'] }}" class="btn btn-danger">delete</a>
-
+                                                                <a href="/delete-projet?id_prj={{  i['id'] }}" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i></a>
+                                                                
                                                                </div>
                                                             </td>   
                                                              
@@ -290,11 +319,33 @@
                                             </div>   
                                     </div>
                                     
-                                    
-
-
-                                    <div id="styleSelector">
-
+                                    <!-- modal -->
+                                    <button type="button" class="btn btn-primary" style="margin-left: 200px; " id="breport" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Open modal for @mdo</button>
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">New message</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form>
+                                            <div class="mb-3">
+                                                <label for="recipient-name" class="col-form-label">Recipient:</label>
+                                                <input type="text" class="form-control" id="recipient-name">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="message-text" class="col-form-label">Message:</label>
+                                                <textarea class="form-control" id="message-text"></textarea>
+                                            </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary">Send message</button>
+                                        </div>
+                                        </div>
+                                    </div>
                                     </div>
                                 </div>
                             </div>
@@ -349,6 +400,14 @@
 <![endif]-->
 <!-- Warning Section Ends -->
 <!-- Required Jquery -->
+<script>
+    let link=document.querySelector("#report")
+    let btn=document.querySelector("#breport")
+    link.onclick=(e)=>{
+        e.preventDefault()
+        btn.click()
+    }
+</script>
 <script type="text/javascript" src="{{url_for('static', filename='assets/js/jquery/jquery.min.js')}}"></script>
 <script type="text/javascript" src="{{url_for('static', filename='assets/js/jquery-ui/jquery-ui.min.js')}}"></script>
 <script type="text/javascript" src="{{url_for('static', filename='assets/js/popper.js/popper.min.js')}}"></script>
