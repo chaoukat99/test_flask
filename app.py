@@ -222,9 +222,25 @@ def show_project():
              task= cursor_task.fetchall()
              session["task"]=task
      return render_template("show_project.html")     
-@app.route("/report")
+@app.route("/report",methods=["POST"])
 def report():
-     return render_template("report.html")
+     
+
+     typee=request.form["type"]
+     nom=str(request.form["nom"])
+     sub=request.form["subject"]
+     message=request.form["message"]
+        
+    
+     cursor = mysql.connection.cursor() 
+     query=cursor.execute("INSERT INTO report(type,sub,message,nom_re) VALUES(%s,%s,%s,%s)",(typee,sub,message,nom))
+     if query :
+          cursor.connection.commit()
+          cursor.close()
+          if typee=="pm":
+             return redirect("/projectmanager-dash")
+          elif typee=="eng":
+               return redirect("/engineer-dash")
 @app.route("/test_in")
 def t_in():
      return render_template("Temp_eng.html")
@@ -439,7 +455,7 @@ def del_projet():
            cursor_delete.close()
           
            project_cursor=mysql.connection.cursor()
-           all_projects_query=project_cursor.execute("""SELECT projet.id_projet , projet.nom_projet ,ingenieur.nom_complet,status , projet.date_debut ,projet.date_fin FROM projet 
+           all_projects_query=project_cursor.execute("""SELECT projet.id_projet , projet.nom_projet ,ingenieur.nom_complet,projet.status , projet.date_debut ,projet.date_fin FROM projet 
 JOIN tache on tache.id_projet = projet.id_projet JOIN ingenieur on ingenieur.id_ing = tache.id_ing WHERE projet.id_chef_trg=%s""",(str(session["pm_data"][0][0])))
            if all_projects_query:
                  r_project=project_cursor.fetchall()
