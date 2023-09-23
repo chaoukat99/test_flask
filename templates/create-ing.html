@@ -29,7 +29,8 @@
       <!-- Style.css -->
       <link rel="stylesheet" href="{{url_for('static', filename='assets/css/style.css')}}">
       <link rel="stylesheet" href="{{url_for('static', filename='assets/css/jquery.mCustomScrollbar.css')}}">
-      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.11/dist/sweetalert2.all.min.js">
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.11/dist/sweetalert2.all.min.js"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
       </script>
   </head>
@@ -111,7 +112,7 @@
                             <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Layout</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="active">
-                                    <a href="/admin-dash">
+                                    <a href="/projectmanager-dash">
                                         <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
                                         <span class="pcoded-mcaret"></span>
@@ -125,56 +126,34 @@
                                     </a>
                                     <ul class="pcoded-submenu">
                                         <li class=" ">
-                                            <a href="/create_ing">
+                                            <a href="/create-ing">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Create engineers</span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Create engineer</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class=" ">
                                             <a href="/show_engineers_pm">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Show engineers</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-                                        <li class=" ">
-                                            <a href="tabs.html">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Delete engineers</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-                                        <li class=" ">
-                                            <a href="color.html">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Report</span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Show engineer</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                     </ul>
                                 </li>
+                        
                             
-                            </ul>
-                            <ul class="pcoded-item pcoded-left-item">
                                 <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)">
-                                        <span class="pcoded-micon" style="background-color: rgb(63, 167, 7);"><i class="icofont icofont-warning-alt  card1-icon"></i></span>
+                                        <span class="pcoded-micon" style="background-color: rgb(63, 167, 7);"><i class="fa-solid fa-list-check"></i></i></span>
                                         <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Manage projects</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
                                         <li class=" ">
-                                            <a href="/create-ing">
+                                            <a href="/create-project">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Create projects</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-                                        <li class=" ">
-                                            <a href="/show_engineers_pm">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Show projects</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
@@ -187,26 +166,45 @@
                                         </li>
                                     </ul>
                                 </li>
-                                
+                           
                                 <li>
                                     <a href="/pm-statistics">
-                                        <span class="pcoded-micon" style="background-color: #FFB64D;"><i class="ti-layers"></i><b>FC</b></span>
+                                        <span class="pcoded-micon"><i class="fa-solid fa-chart-pie"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Statistics</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li>
+                                
+                                <!-- <li>
                                     <a href="/tasks">
-                                        <span class="pcoded-micon" style="background-color: rgb(139, 139, 144);"><i class="ti-layers"></i><b>FC</b></span>
+                                        <span class="pcoded-micon"><i class="ti-layers bg-c-green"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">tasks</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
+                                </li> -->
+                                <li class="active">
+                                    <a href="/tasks">
+                                        <span class="pcoded-micon" style="background-color: rgb(139, 139, 144);"><i class="ti-layers"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Tasks</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
                                 </li>
-                            </ul>
-                            
+                                <li class="active">
+                                    <a href="/report" id="report">
+                                        <span class="pcoded-micon" style="background-color: #39ADB5;;"><i class="fa-regular fa-folder"></i><b>C</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Report</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
                                 
-                            </ul>
+                            
+
+                            </ul>              
+                                
+                            
                     </nav>
+                    
+          
                     <div class="pcoded-content">
                         <div class="pcoded-inner-content">
                             <div class="main-body d-flex justify-content-center " >
@@ -255,10 +253,10 @@
                                                 <div class="form-group">
                                                   <button type="submit" class="btn btn-primary btn-block" style="background-color: #FC6180;" id="btn-submit"> Create  </button>
                                                 </div>
-                                              </form>
+                                            </form>
                                         </div>
 
-                                      </div>
+                                     </div>
                                     
                                     <script>
                                         let pass1 = document.querySelector("#pass1")
@@ -285,48 +283,7 @@
             </div>
         </div>
 
-        <!-- Warning Section Starts -->
-        <!-- Older IE warning message -->
-    <!--[if lt IE 9]>
-<div class="ie-warning">
-    <h1>Warning!!</h1>
-    <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
-    <div class="iew-container">
-        <ul class="iew-download">
-            <li>
-                <a href="http://www.google.com/chrome/">
-                    <img src="assets/images/browser/chrome.png" alt="Chrome">
-                    <div>Chrome</div>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.mozilla.org/en-US/firefox/new/">
-                    <img src="assets/images/browser/firefox.png" alt="Firefox">
-                    <div>Firefox</div>
-                </a>
-            </li>
-            <li>
-                <a href="http://www.opera.com">
-                    <img src="assets/images/browser/opera.png" alt="Opera">
-                    <div>Opera</div>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.apple.com/safari/">
-                    <img src="assets/images/browser/safari.png" alt="Safari">
-                    <div>Safari</div>
-                </a>
-            </li>
-            <li>
-                <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
-                    <img src="assets/images/browser/ie.png" alt="">
-                    <div>IE (9 & above)</div>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <p>Sorry for the inconvenience!</p>
-</div>
+       
 <![endif]-->
 <!-- Warning Section Ends -->
 <!-- Required Jquery -->

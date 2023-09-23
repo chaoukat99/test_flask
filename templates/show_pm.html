@@ -29,9 +29,8 @@
       <!-- Style.css -->
       <link rel="stylesheet" href="{{url_for('static', filename='assets/css/style.css')}}">
       <link rel="stylesheet" href="{{url_for('static', filename='assets/css/jquery.mCustomScrollbar.css')}}">
-      <script src="
-      https://cdn.jsdelivr.net/npm/sweetalert2@11.7.11/dist/sweetalert2.all.min.js
-      "></script>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.11/dist/sweetalert2.all.min.js"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   </head>
 
   <body>
@@ -130,16 +129,9 @@
                                     <ul class="pcoded-submenu">
                                         
                                         <li class=" ">
-                                            <a href="/show_engineers">
+                                            <a href="/show_engineers_admin">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Show engineers</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-                                        <li class=" ">
-                                            <a href="color.html">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Report</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
@@ -147,7 +139,7 @@
                                 </li>
                                 <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)">
-                                        <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
+                                        <span class="pcoded-micon"><i class="fa-solid fa-list-check"></i></span>
                                         <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Manage project managers</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
@@ -166,37 +158,17 @@
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
-                                        <li class=" ">
-                                            <a href="tabs.html">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Delete project managers</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-                                        <li class=" ">
-                                            <a href="color.html">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Report</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
                                     </ul>
                                 </li>
                             </ul>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li>
                                     <a href="/admin-statistics">
-                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                        <span class="pcoded-micon" style="background-color: #FFB64D;;"><i class="fa-solid fa-chart-pie"></i></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Statistics</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
-                                </li>
-                              
-                                
-                            </ul>
-
-                            
-                                
+                                </li>    
                             </ul>
                     </nav>
                                     
@@ -210,6 +182,7 @@
                                                             <th>Email</th>
                                                             <th>Phone number</th>
                                                             <th>Department</th>
+                                                            <th>Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -219,6 +192,7 @@
                                                         <td>{{i[6]}}</td>
                                                         <td>{{i[5]}}</td>
                                                         <td>{{i[3]}}</td>
+                                                        <td><a href=""><i class="fa-solid fa-trash"></i></a></td>
                                                     </tr>
                                                         {% endfor %}
                                                     </tbody>

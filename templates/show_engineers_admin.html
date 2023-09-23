@@ -32,6 +32,8 @@
       <script src="
       https://cdn.jsdelivr.net/npm/sweetalert2@11.7.11/dist/sweetalert2.all.min.js
       "></script>
+     
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   </head>
 
   <body>
@@ -140,7 +142,7 @@
                                 </li>
                                 <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)">
-                                        <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
+                                        <span class="pcoded-micon"><i class="fa-solid fa-list-check"></i></span>
                                         <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Manage project managers</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
@@ -159,23 +161,15 @@
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
-                                        <li class=" ">
-                                            <a href="tabs.html">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Delete project managers</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
                                     </ul>
                                 </li>
                             </ul>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li>
                                     <a href="/admin-statistics">
-                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                        <span class="pcoded-micon" style="background-color: #FFB64D;;"><i class="fa-solid fa-chart-pie"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Statistics</span>
                                         <span class="pcoded-mcaret"></span>
-                                    </a>
                                 </li>
                               
                                 
@@ -196,6 +190,7 @@
                                                             <th>Email</th>
                                                             <th>Phone number</th>
                                                             <th>Department</th>
+                                                            <th>Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -205,6 +200,7 @@
                                                         <td>{{i[2]}}</td>
                                                         <td>{{i[6]}}</td>
                                                         <td>{{i[3]}}</td>
+                                                        <td><a href=""><i class="fa-solid fa-trash"></i></a></td>
                                                     </tr>
                                                         {% endfor %}
                                                     </tbody>

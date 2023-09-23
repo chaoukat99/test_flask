@@ -30,6 +30,8 @@
       <link rel="stylesheet" href="{{url_for('static', filename='assets/css/style.css')}}">
       <link rel="stylesheet" href="{{url_for('static', filename='assets/css/jquery.mCustomScrollbar.css')}}">
       <script src=" https://cdn.jsdelivr.net/npm/sweetalert2@11.7.11/dist/sweetalert2.all.min.js"></script>
+      <script src=" https://cdn.jsdelivr.net/npm/sweetalert2@11.7.11/dist/sweetalert2.all.min.js"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   </head>
 
   <body>
@@ -146,16 +148,9 @@
                                             </a>
                                         </li>
                                         <li class=" ">
-                                            <a href="tabs.html">
+                                            <a href="/delete_eng">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Delete engineer</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-                                        <li class=" ">
-                                            <a href="color.html">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Report</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
@@ -165,22 +160,15 @@
                             
                                 <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)">
-                                        <span class="pcoded-micon" style="background-color: rgb(63, 167, 7);"><i class="icofont icofont-warning-alt  card1-icon"></i></span>
+                                        <span class="pcoded-micon" style="background-color: rgb(63, 167, 7);"><i class="fa-solid fa-list-check"></i></i></span>
                                         <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Manage projects</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
                                         <li class=" ">
-                                            <a href="/create-ing">
+                                            <a href="/create-project">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Create projects</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-                                        <li class=" ">
-                                            <a href="/show_engineers_pm">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Show projects</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
@@ -196,7 +184,7 @@
                            
                                 <li>
                                     <a href="/pm-statistics">
-                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                        <span class="pcoded-micon"><i class="fa-solid fa-chart-pie"></i><b>FC</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Statistics</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
@@ -216,11 +204,17 @@
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                              
+                                <li class="active">
+                                    <a href="/report" id="report">
+                                        <span class="pcoded-micon" style="background-color: #39ADB5;;"><i class="fa-regular fa-folder"></i><b>C</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Report</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
                                 
                             
 
-                            </ul>
+                            </ul> 
 
                             
                                 
