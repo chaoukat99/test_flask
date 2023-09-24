@@ -219,8 +219,9 @@ def delete():
            return redirect("/delete_project")
 @app.route("/show_project")
 def show_project():
+     id_prj=request.args.get("id_prj")
      cursor_task=mysql.connection.cursor()
-     query_cursor6=cursor_task.execute("SELECT * FROM tache")  
+     query_cursor6=cursor_task.execute("SELECT * FROM tache WHERE id_projet=%s",(id_prj,))  
      if query_cursor6:
              task= cursor_task.fetchall()
              session["task"]=task
