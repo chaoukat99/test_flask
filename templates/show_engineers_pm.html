@@ -222,13 +222,13 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {%for i in session["all_engineers"]%}
+                                            {%for i in engs%}
                                             <tr>
                                             <td>{{i[1]}}</td>
                                             <td>{{i[2]}}</td>
                                             <td>{{i[6]}}</td>
                                             <td>{{i[3]}}</td>
-                                            <td><a href=""><i class="fa-solid fa-trash"></i></a></td>
+                                            <td><a href="/delete_eng?id_eng={{ i[0] }}"><i class="fa-solid fa-trash"></i></a></td>
                                         </tr>
                                             {% endfor %}
                                         </tbody>

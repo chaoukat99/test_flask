@@ -192,28 +192,31 @@ def store_project():
         cursor_insert.close()
         return jsonify("unsuccess")
 
-
-@app.route("/delete_project")
-def project():
-      cursor1= mysql.connection.cursor()
-      query1=cursor1.execute("SELECT projet.id_projet, projet.nom_projet FROM projet WHERE id_chef_trg=%s",str(session["pm_data"][0][0]))
-      if query1:
-         project=cursor1.fetchall()
-         return render_template("delete_project.html",project=project)
-@app.route("/trigger_delete", methods=["POST", "DELETE"])
-def delete():
+@app.route("/delete_pro")
+def dell():
      cursor1= mysql.connection.cursor()
      query1=cursor1.execute("SELECT projet.id_projet, projet.nom_projet FROM projet WHERE id_chef_trg=%s",str(session["pm_data"][0][0]))
      if query1:
          project=cursor1.fetchall()
-         cursor_delete=mysql.connection.cursor()
          
+         return render_template("delete_project",project=project)
+
+@app.route("/delete_project")
+def prt():
+      cursor1= mysql.connection.cursor()
+      query1=cursor1.execute("SELECT projet.id_projet, projet.nom_projet FROM projet WHERE id_chef_trg=%s",str(session["pm_data"][0][0]))
+      
+      project=cursor1.fetchall()
+      return render_template("delete_project.html",project=project)
+@app.route("/trigger_delete", methods=["POST","DELETE"])
+def delete():
+     cursor_delete=mysql.connection.cursor()
      id_p= request.form["p_name"]
-     query2=cursor_delete.execute("DELETE FROM projet WHERE id_projet=%d",(int(id_p)))
+     query2=cursor_delete.execute("DELETE FROM projet WHERE id_projet=%s",(id_p,))
      if query2 :
            mysql.connection.commit()
            cursor_delete.close()
-           return render_template("delete_project.html", project=project)
+           return redirect("/delete_project")
 @app.route("/show_project")
 def show_project():
      cursor_task=mysql.connection.cursor()
@@ -282,20 +285,24 @@ def tasks():
     # projet
     cursor1= mysql.connection.cursor()
     query1=cursor1.execute("SELECT projet.id_projet, projet.nom_projet FROM projet WHERE id_chef_trg=%s",str(session["pm_data"][0][0]))
-    if query1:
-         project=cursor1.fetchall()
+    
+    project=cursor1.fetchall()
     # engineer
     cursor2= mysql.connection.cursor()
     query2=cursor2.execute("SELECT ingenieur.id_ing, ingenieur.nom_complet FROM ingenieur")
-    if query2:
-         ingenieur1=cursor2.fetchall()
+    
+    ingenieur1=cursor2.fetchall()
     return render_template("tasks.html",projects=project,ing=ingenieur1)
 @app.route("/show_engineers_admin")
 def show_engineers_admin():
     return render_template("show_engineers_admin.html")
 @app.route("/show_engineers_pm")
 def show_engineers_pm():
-    return render_template("show_engineers_pm.html")
+    cursor_engineer=mysql.connection.cursor()
+    query_cursor6=cursor_engineer.execute("SELECT * FROM ingenieur")
+    if query_cursor6:
+          all_engineers= cursor_engineer.fetchall()
+    return render_template("show_engineers_pm.html",engs=all_engineers)
 @app.route("/create-project", methods=["POST"])
 def createproject():
      if request.method== "POST":
@@ -443,6 +450,16 @@ def check_log_engineer():
                 """
         
 
+
+@app.route("/delete_eng")
+def deleng():
+     param=request.args.get("id_eng")
+     cursor=mysql.connection.cursor()
+     query=cursor.execute("DELETE FROM ingenieur WHERE id_ing=%s",(param,))
+     if query:
+          mysql.connection.commit()
+          cursor.close()
+          return redirect("/projectmanager-dash")
 
 @app.route("/delete")
 def del_projet():
