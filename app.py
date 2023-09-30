@@ -90,7 +90,24 @@ def statisticsadmin():
              return render_template("statistics-admin.html")
             
              return "shshs"
-      
+
+@app.route("/edit-satatus-projet",methods=["POST"])   
+def editstat():
+     if request.method=="POST":
+          id_prj=request.form["id_prj"]
+          new_val=request.form["status"]
+          cursor=mysql.connection.cursor()
+          query=cursor.execute("UPDATE projet set status=%s WHERE projet.id_projet=%s",(new_val,id_prj))
+          mysql.connection.commit()
+          cursor.close()
+          return redirect("/projectmanager-dash")
+
+          
+          
+
+
+
+
 @app.route("/admin-profile")
 def profileadmin():
      return render_template("profile-admin.html")
@@ -122,10 +139,19 @@ def dashpm():
      data_received=get_flashed_messages(category_filter='data') 
      data=session.get("data",[])
      data_received = request.args.get('msg')
+     project_cursor=mysql.connection.cursor()
+     all_projects_query=project_cursor.execute("""SELECT projet.id_projet , projet.nom_projet ,ingenieur.nom_complet,status , projet.date_debut ,projet.date_fin FROM projet 
+JOIN tache on tache.id_projet = projet.id_projet JOIN ingenieur on ingenieur.id_ing = tache.id_ing WHERE projet.id_chef_trg=%s""",(session["pm_data"][0][0],))
+     if all_projects_query:
+                 r_project=project_cursor.fetchall()
+                 array_of_p=dictt(r_project)
 
     
-     return render_template("dashpm.html",projects=data,msg=data_received)
-    
+                 return render_template("dashpm.html",projects=array_of_p,msg=data_received)
+     else :
+       array_of_p=[]
+       return render_template("dashpm.html",projects=array_of_p,msg=data_received)
+                       
 
 
 
@@ -523,7 +549,11 @@ JOIN tache on tache.id_projet = projet.id_projet JOIN ingenieur on ingenieur.id_
                  array_of_p=dictt(r_project)
                #   return redirect(url_for(".dashpm",projects=array_of_p)) 
                  session["data"]=array_of_p
-            return redirect(url_for('dashpm')) 
+                 return render_template("dashpm.html",projects=array_of_p) 
+            else:
+                 array_of_p=[]
+                 return  render_template("dashpm.html",projects=array_of_p)  
+          #     return render_template()
                  
          
 

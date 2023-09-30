@@ -291,26 +291,55 @@
                                                             <td>{{ i["id"] }}</td>
                                                             <td>{{ i["name_p"] }}</td>
                                                             <td>{{ i["ing_name"] }}</td>
-                                                            <td><span class="badge bg-primary">{{ i["status"] }}</span></td>
+                                                            <td>
+                                                                <form action="/edit-satatus-projet" method="post" class="d-inline">
+                                                                      <select name="status" id="test" class="form-control" value="{{ i['status'] }}">
+                                                                          <option value="Done">Done</option>
+                                                                          <option value="on process">on process</option>
+                                                                          <option value="Start">Start</option>
+                                                                      </select>    
+
+                                                                      <input type="hidden" name="id_prj" value="{{ i['id'] }}">
+                                                                </form>
+                                                            </td>
                                                             <td>{{ i["date_debut"] }}</td>
                                                             <td>{{ i["date_fin"] }}</td>
                                                             <td><div class="d-flex justify-content-center " style="gap: 10px;">
                                                                 <a href="/show_project?id_prj={{ i['id'] }}" class="btn btn-outline-info"><i class="fa-solid fa-eye"></i></a>
-                                                                <a href="" class="btn btn-outline-warning "><i class="fa-solid fa-pen-to-square"></i></a>
 
                                                                
-                                                                <a href="/delete-projet?id_prj={{  i['id'] }}" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i></a>
-                                                                
+                                                                    
                                                                </div>
                                                             </td>   
                                                              
                                                         </tr>
                                                        {% endfor %}
-                                                     
+                                                     <script>
+                                                        const selectElements = document.querySelectorAll('select');
+
+// Iterate over the select form elements
+for (const selectElement of selectElements) {
+  // Get the value of the select form element
+  const value = selectElement.getAttribute('value');
+
+  // Find the option with the given value
+  const optionElement = selectElement.querySelector(`option[value="${value}"]`);
+
+  // If the option exists, select it
+  if (optionElement) {
+    optionElement.selected = true;
+  }
+selectElement.onchange=()=>{
+    selectElement.parentElement.submit()
+}
+}
+                 </script>
                                                         
                                                     </tbody>
-                                                  </table>         
-                                            </div>   
+                                                  </table>    
+
+                                            </div> 
+                                              
                                     </div>
                                     
                                     <!-- modal -->
@@ -359,6 +388,9 @@
         </div>
     </div>
 
+
+
+  
         <!-- Warning Section Starts -->
         <!-- Older IE warning message -->
     <!--[if lt IE 9]>
