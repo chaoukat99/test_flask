@@ -148,7 +148,9 @@
                                                     <div class="card-block-small">
                                                         <i class="icofont icofont-pie-chart bg-c-blue card1-icon"></i>
                                                         <span class="text-c-blue f-w-600">Tasks</span>
-                                                        <h4>2</h4>
+                                                        <h4>
+                                                            {{ stats1[0][0] }}
+                                                        </h4>
                                                         
                                                     </div>
                                                 </div>
@@ -166,7 +168,9 @@
                                                     <div class="card-block-small">
                                                         <i class="icofont icofont-social-twitter bg-c-yellow card1-icon"></i>
                                                         <span class="text-c-yellow f-w-600">Projects</span>
-                                                        <h4>2</h4>
+                                                        <h4>
+                                                           2
+                                                        </h4>
                                                         
                                                     </div>
                                                 </div>
@@ -199,36 +203,58 @@
                                                             <th>Projects</th>
                                                             <th>Tasks</th>
                                                             <th>Status</th>
-                                                            <th class="text-center">Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+                                                        {% for i in projects %}
                                                         <tr>
-                                                          <td>Project One</td>
-                                                          <td>Task 1</td>   
-                                                          <td><span class="badge bg-primary">Primary</span></td>
+                                                          
+                                                          <td>{{ i[0]}}</td>
+                                                          <td>{{ i[2]}}</td>   
                                                           <td>
-                                                           <div class="d-flex justify-content-center" style="gap: 10px;">
-                                                            <a href="" class="btn btn-warning">Update</a>
-                                                           </div>
-                                                          </td>
-                                                        </tr>
-                                                        <tr>
-                                                          <td>Project two</td>
-                                                          <td>Task 2</td>   
-                                                          <td><span class="badge bg-success">Primary</span></td>
-                                                          <td>
-                                                           <div class="d-flex justify-content-center" style="gap: 10px;">
-                                                            <a href="" class="btn btn-warning">Update</a>
-                                                           </div>
-                                                          </td>
-                                                        </tr>
-                                                    </tbody>
+                                                            <div class="input-group-prepend">
+                                                                  <form action="/edit-task" class="d-inline" method="POST">
+
+                                                                 
+                                                                <select  class="form-control" name="status_task" value="{{ i[3] }}" >
+                                                                    <option value="On Hold">On Hold </option>
+                                                                    <option value="Doing">Doing </option>
+                                                                    <option value="done">Done</option>
+                                                                </select>
+                                                                <input type="hidden" name="id_task" value="{{ i[1] }}">
+                                                            </form>
+                                                            </div>
+                                                        </td>
+                                                        
+                                                      </tr>
+                                                      {% endfor %}
+                                                  </tbody>
+
+
                                                   </table>         
                                             </div>   
                                     </div>
                                     
-                                    
+                                    <script>
+                                         const selectElements = document.querySelectorAll('select');
+
+// Iterate over the select form elements
+for (const selectElement of selectElements) {
+  // Get the value of the select form element
+  const value = selectElement.getAttribute('value');
+
+  // Find the option with the given value
+  const optionElement = selectElement.querySelector(`option[value="${value}"]`);
+
+  // If the option exists, select it
+  if (optionElement) {
+    optionElement.selected = true;
+  }
+selectElement.onchange=()=>{
+    selectElement.parentElement.submit()
+}
+}
+                                    </script>
 
 
                                     <div id="styleSelector">

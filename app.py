@@ -279,7 +279,24 @@ def show_pm():
      return render_template("show_pm.html")
 @app.route("/engineer-dash")
 def dashengineer():
-     return render_template("dashengineer.html")
+     # statistic 1 
+     cursor_1=mysql.connection.cursor()
+     query=cursor_1.execute("SELECT COUNT(id_tache) FROM tache WHERE id_ing=%s",(session["eng_data"][0][0],))
+     stat1=cursor_1.fetchall()
+     # Statistic 2 
+     cursor_2=mysql.connection.cursor()
+     query2=cursor_2.execute("SELECT COUNT(id_projet) FROM tache WHERE id_ing=%s",(session["eng_data"][0][0],))
+     cursor = mysql.connection.cursor()
+     query=cursor.execute("SELECT projet.nom_projet, tache.id_tache, tache.libelle, tache.statuss FROM tache JOIN projet ON projet.id_projet=tache.id_projet WHERE tache.id_ing=%s",(str(session["eng_data"][0][0]),))
+     stat2=cursor_2.fetchall()
+     project=cursor.fetchall()
+#     return render_template("dashengineer.html",projects=project)
+     return render_template("dashengineer.html", projects=project,stats1=stat1,stats2=stat2)
+     # return jsonify(stat1)  
+
+
+
+
 @app.route('/login-admin')
 def login_admin_view():
     return render_template("logadmin.html")
@@ -430,7 +447,16 @@ def deconn():
      return redirect("/",302)  
 
 
-
+@app.route("/edit-task",methods=["POST"])
+def edit_stat_task():
+     if request.method=="POST":
+          new_val=request.form["status_task"]
+          id_task=request.form["id_task"]
+          cursor=mysql.connection.cursor()
+          query=cursor.execute("UPDATE tache SET statuss = %s WHERE id_tache=%s",(new_val,id_task))
+          mysql.connection.commit()
+          cursor.close()
+          return redirect("/engineer-dash")
 
 
 
