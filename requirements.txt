@@ -45,7 +45,7 @@ MouseInfo==0.1.3
 multidict==6.0.4
 mysqlclient==2.1.1
 node==0.9.28
-numpy==1.26.0
+numpy==1.21.6
 odict==1.8.0
 openai==0.26.5
 opencv-python==4.8.0.76
